@@ -1,14 +1,13 @@
-# Java-Game
-1.Избиране на герой.
--class programmer -> method hp, normal attack, ability power. /set get/
-2.Избор на ниво /всеки си прави собствено ниво/
--class zombie - method name, normal attack, hp /set get/
--class boss - method name, normal attack, ability power, hp /set get/
-3.Разклонение - всеки си има разклонение
-4.Битка с бос
+1.choose hero.
+- Class programmer -> method hp, normal attack, ability power. / set get /
 
-!Save/load
-!Gold/coin/книги
-!Друг герой
-!Content
-!Нива
+2.Election level / each makes his own level /
+-class zombie - method name, normal attack, hp / set get /
+-class boss - method name, normal attack, ability power, hp / set get /
+3.Razklonenie - everyone has a branch 4.Bitka boss
+
+! Save / load
+! Gold / coin / books
+! Another hero
+! Content
+! Levels
