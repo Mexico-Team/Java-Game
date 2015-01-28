@@ -1,4 +1,4 @@
-1.choose hero.
+1.Choose hero.
 -Class programmer -> method hp, normal attack, ability power. / set get /
 
 2.Election level / each makes his own level /
