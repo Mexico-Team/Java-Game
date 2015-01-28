@@ -2,12 +2,10 @@ import java.util.Scanner;
 
 
 public class sampleLevel {
-	public static void Execute(){
+	public static void Execute(Hero player){
 		Scanner input = new Scanner(System.in);
 		System.out.println("test1");
-		System.out.println("Name???");
-		String heroName = input.nextLine();
-		HeroProgrammer hero = new HeroProgrammer(heroName);
+		Hero hero = player;
 		//First Fight
 		System.out.println(hero.getName());
 		System.out.println(hero.getBasicAttack());

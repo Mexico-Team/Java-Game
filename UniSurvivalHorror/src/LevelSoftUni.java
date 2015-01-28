@@ -1,6 +1,6 @@
 
 public class LevelSoftUni {
-	public static void Execute(){
+	public static void Execute(Hero player){
 		System.out.println("test1");
 	}
 }
