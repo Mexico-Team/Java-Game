@@ -1,5 +1,5 @@
 1.choose hero.
-- Class programmer -> method hp, normal attack, ability power. / set get /
+-Class programmer -> method hp, normal attack, ability power. / set get /
 
 2.Election level / each makes his own level /
 -class zombie - method name, normal attack, hp / set get /
