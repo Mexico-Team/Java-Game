@@ -45,11 +45,29 @@ public class LevelSoftUni {
 		System.out.println("Your exit is blocked, the only way is forward.");
 		//Second interaction;
 		
+		//Event
+		hero.setHP(hero.getHP() + 1000);
+		System.out.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been");
+		hpStatus(hero);
 		
+		//Event
+		hero.setHP(hero.getHP() - 100);
+		System.out.println("You stepped over old rusty computer, you loose 100 hp");
+		if (hero.getHP() < 0) {
+			return;
+		}
 		
+		//Event
+		hero.setBasicAttack(hero.getBasicAttack() + 30);
+		System.out.println("You meet Sto, he tries to explain Linux to you as a result you gain 120 basic attack - Java code no longer scares you!");
+		System.out.printf("Your basic attack is %d now\n",  hero.getBasicAttack());
 		
-		
-		
+		//Event
+		hero.setHP(hero.getHP() - 100);
+		System.out.println("You tip over a cable, you loose 100 hp");
+		if (hero.getHP() < 0) {
+			return;
+		}
 		
 	}
 	
@@ -79,6 +97,10 @@ public class LevelSoftUni {
 			return true;
 		}
 		return false;
+	}
+	
+	private static void hpStatus(Hero hero) {
+		System.out.printf("%s now has %d hp", hero.getName(), hero.getHP());
 	}
 	
 	private static Hero battle(Hero hero, CommonEnemy enemy) {
