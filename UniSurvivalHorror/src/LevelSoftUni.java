@@ -20,11 +20,11 @@ public class LevelSoftUni {
 			switch (choice) {
 			case "1":
 				hero.setBasicAttack(hero.getBasicAttack() + 30);
-				System.out.printf("Lord Nakov commands you for your bravery and he gave you old rusty keyboard to defend yourself. You gained 30 basic attack and now have %s basic attack\n"
+				System.out.printf("Lord Nakov commands you for your bravery and he gave you old rusty keyboard to defend yourself. You gained 30 basic attack and now have %s basic attack.\n"
 						, hero.getBasicAttack() );
 				break;
 			case "2":
-				System.out.println("You try to escape, but you are attacked by angry mob");
+				System.out.println("You try to escape, but you are attacked by Angry Mob.");
 				CommonEnemy mob = new CommonEnemy("Angry Mod", 500, 50);
 				//Event
 				hero = battle(hero, mob);
@@ -46,28 +46,34 @@ public class LevelSoftUni {
 		//Second interaction;
 		
 		//Event
+		System.out.println("---------------");
 		hero.setHP(hero.getHP() + 1000);
-		System.out.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been");
+		System.out.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been.");
 		hpStatus(hero);
 		
 		//Event
+		System.out.println("---------------");
 		hero.setHP(hero.getHP() - 100);
-		System.out.println("You stepped over old rusty computer, you loose 100 hp");
+		System.out.println("You stepped over old rusty computer, you loose 100 hp.");
 		if (hero.getHP() < 0) {
 			return;
 		}
+		hpStatus(hero);
 		
 		//Event
+		System.out.println("---------------");
 		hero.setBasicAttack(hero.getBasicAttack() + 30);
 		System.out.println("You meet Sto, he tries to explain Linux to you as a result you gain 120 basic attack - Java code no longer scares you!");
-		System.out.printf("Your basic attack is %d now\n",  hero.getBasicAttack());
+		System.out.printf("Your basic attack is %d now.\n",  hero.getBasicAttack());
 		
 		//Event
+		System.out.println("---------------");
 		hero.setHP(hero.getHP() - 100);
-		System.out.println("You tip over a cable, you loose 100 hp");
+		System.out.println("You tip over a cable, you loose 100 hp.");
 		if (hero.getHP() < 0) {
 			return;
 		}
+		hpStatus(hero);
 		
 	}
 	
@@ -79,25 +85,25 @@ public class LevelSoftUni {
 	
 	private static void battleInfo(Hero hero, CommonEnemy enemy) {
 		if (enemy.getHP() <= 0) {
-			System.out.printf("%s has %d hp left, %s has no hp left\n",
+			System.out.printf("%s has %d hp left, %s has no hp left.\n",
 					hero.getName(), hero.getHP(), enemy.getName());
 		}
 		else {
-			System.out.printf("%s has %d hp left, %s has %d hp left\n",
+			System.out.printf("%s has %d hp left, %s has %d hp left.\n",
 				hero.getName(), hero.getHP(), enemy.getName(), enemy.getHP());
 		}
 	}
 	
 	private static boolean isHeroAlive(Hero hero) {
 		if (hero.getHP() < 0) {
-			System.out.println("Game Over");
+			System.out.println("Level Over!");
 			return false;
 		}
 		return true;
 	}
 	
 	private static boolean isValid(String choice) {
-		System.out.printf("%s is not valid choice, try again", choice);
+		System.out.printf("%s is not valid choice, try again!", choice);
 		choice = input.nextLine();
 		if (choice.equals("1") || choice.equals("2")) {
 			return true;
@@ -106,7 +112,7 @@ public class LevelSoftUni {
 	}
 	
 	private static void hpStatus(Hero hero) {
-		System.out.printf("%s now has %d hp", hero.getName(), hero.getHP());
+		System.out.printf("%s now has %d hp!\n", hero.getName(), hero.getHP());
 	}
 	
 	private static Hero battle(Hero hero, CommonEnemy enemy) {
@@ -115,7 +121,7 @@ public class LevelSoftUni {
 					enemy.getName());
 			String attackChoice = input.nextLine();
 			while (!attackChoice.equals("1") && !attackChoice.equals("2")) {
-				System.out.printf("%s is not valid choice, try again", attackChoice);
+				System.out.printf("%s is not valid choice, try again!", attackChoice);
 				attackChoice = input.nextLine();
 			}
 			switch (attackChoice) {
@@ -146,14 +152,14 @@ public class LevelSoftUni {
 				}
 				break;
 			}
-			System.out.printf("%s is no more!\n", enemy.getName());
 		}
+		System.out.printf("%s is no more!\n", enemy.getName());
 		return hero;
 	}
 
 	private static Hero healerEvent(Hero hero) {
 		hero.setHP(hero.GetMaxHP());
-		System.out.printf("Lord Nakov apears in front of you %s and heals you with magic Java . Now you have %d hp and full ability power\n",
+		System.out.printf("Lord Nakov apears in front of you %s and heals you with magic Java Algorithm. Now you have %d hp and full ability power!\n",
 				hero.getName(), hero.getHP());
 		return hero;
 	}
