@@ -1,14 +1,9 @@
-import java.util.Scanner;
 
 public class Game {
 
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
 		// Choose hero
-		/*To be added Utility.Method for selection the hero*/
-		System.out.println("Name???");
-		String heroName = input.nextLine();
-		Hero player = new Hero(heroName);
+		Hero player = Utility.chooseHero();
 		// Choose level
 		String choice = Utility.levelChoice();
 		while (!choice.equals("Exit")) {
@@ -25,8 +20,11 @@ public class Game {
 			case "4":
 				LevelUACEG.Execute(player);
 				break;
+			case "Help":
+				System.out.println("Help manu ect ect");
+				break;
 			default:
-				// check input
+				System.out.printf("%s is not valid choice", choice);
 				break;
 			}
 			// Replay levels

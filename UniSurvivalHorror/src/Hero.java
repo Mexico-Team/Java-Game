@@ -1,13 +1,18 @@
 
 public class Hero {
 	private String name;
-	private int healthPoints = 1000;
-	private int basicAttack = 100;
-	private int abilityPower = 100;
+	private int maximumHealthPoints;
+	private int healthPoints;
+	private int basicAttack;
+	private int abilityPower;
 
 	//Constructor
-	public Hero(String name){
+	public Hero(String name, int HP, int basicAttack, int abilityPower){
 		this.name = name;
+		this.maximumHealthPoints = HP;
+		this.healthPoints = HP;
+		this.basicAttack = basicAttack;
+		this.abilityPower = abilityPower;
 	}
 	
 	//Methods
@@ -18,12 +23,16 @@ public class Hero {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getHealthPoints() {
+	
+	public int GetMaxHP() {
+		return maximumHealthPoints;
+	}
+	
+	public int getHP() {
 		return healthPoints;
 	}
 
-	public void setHealthPoints(int healthPoints) {
+	public void setHP(int healthPoints) {
 		this.healthPoints = healthPoints;
 	}
 
@@ -42,6 +51,5 @@ public class Hero {
 	public void setAbilityPower(int abilityPower) {
 		this.abilityPower = abilityPower;
 	}
-	
 	
 }
