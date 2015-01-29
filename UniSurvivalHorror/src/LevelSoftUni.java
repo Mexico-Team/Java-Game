@@ -62,7 +62,7 @@ public class LevelSoftUni {
 		
 		//Event
 		System.out.println("---------------");
-		hero.setBasicAttack(hero.getBasicAttack() + 30);
+		hero.setBasicAttack(hero.getBasicAttack() + 120);
 		System.out.println("You meet Sto, he tries to explain Linux to you as a result you gain 120 basic attack - Java code no longer scares you!");
 		System.out.printf("Your basic attack is %d now.\n",  hero.getBasicAttack());
 		
@@ -128,10 +128,10 @@ public class LevelSoftUni {
 			case "1":
 				int damage = hero.getBasicAttack() * rng();
 				enemy.setHP(enemy.getHP() - damage);
-				System.out.printf("You attacked the %s for %d basic damage\n", enemy.getName(), damage);
+				System.out.printf("You attacked the %s for %d basic damage.\n", enemy.getName(), damage);
 				int enemyDamage = enemy.getBasicAttack() * rng();
 				hero.setHP(hero.getHP() - enemyDamage);
-				System.out.printf("%s strikes you back for %d\n", enemy.getName(), enemyDamage);
+				System.out.printf("%s strikes you back for %d.\n", enemy.getName(), enemyDamage);
 				battleInfo(hero, enemy);
 				if (!isHeroAlive(hero)) {
 					return hero;
