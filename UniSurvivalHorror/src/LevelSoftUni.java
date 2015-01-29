@@ -78,8 +78,14 @@ public class LevelSoftUni {
 	}
 	
 	private static void battleInfo(Hero hero, CommonEnemy enemy) {
-		System.out.printf("%s has %d hp left, %s has %d hp left\n",
+		if (enemy.getHP() <= 0) {
+			System.out.printf("%s has %d hp left, %s has no hp left\n",
+					hero.getName(), hero.getHP(), enemy.getName());
+		}
+		else {
+			System.out.printf("%s has %d hp left, %s has %d hp left\n",
 				hero.getName(), hero.getHP(), enemy.getName(), enemy.getHP());
+		}
 	}
 	
 	private static boolean isHeroAlive(Hero hero) {
