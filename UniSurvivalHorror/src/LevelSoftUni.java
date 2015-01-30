@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class LevelSoftUni {
 	
-	public static Scanner input = new Scanner(System.in);
+	private static Scanner input = new Scanner(System.in);
 	
 	public static void Execute(Hero player){
-		String choice = new String();
+		String choice;
 		boolean validChoice;
 		Hero hero = player;
 		//First interaction;
@@ -19,7 +19,7 @@ public class LevelSoftUni {
 		while (!validChoice) {
 			switch (choice) {
 			case "1":
-				hero.setBasicAttack(hero.getBasicAttack() + 30);
+				hero.addBasicAttack(30);
 				System.out.printf("Lord Nakov commands you for your bravery and he gave you old rusty keyboard to defend yourself. You gained 30 basic attack and now have %s basic attack.\n"
 						, hero.getBasicAttack() );
 				break;
@@ -38,22 +38,23 @@ public class LevelSoftUni {
 			}
 			break;
 		}
-		if (hero.getHP() < 800) {
-			hero = healerEvent(hero);
-		}
+		//Event
+		System.out.println("---------------");
+		hero = healerEvent(hero, 800);
+		//Second interaction;
 		System.out.println("---------------");
 		System.out.println("Your exit is blocked, the only way is forward.");
-		//Second interaction;
+
 		
 		//Event
 		System.out.println("---------------");
-		hero.setHP(hero.getHP() + 1000);
+		hero.addHP(1000);
 		System.out.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been.");
 		hpStatus(hero);
 		
 		//Event
 		System.out.println("---------------");
-		hero.setHP(hero.getHP() - 100);
+		hero.removeHP(100);
 		System.out.println("You stepped over old rusty computer, you loose 100 hp.");
 		if (hero.getHP() < 0) {
 			return;
@@ -62,13 +63,13 @@ public class LevelSoftUni {
 		
 		//Event
 		System.out.println("---------------");
-		hero.setBasicAttack(hero.getBasicAttack() + 120);
+		hero.addBasicAttack(120);
 		System.out.println("You meet Sto, he tries to explain Linux to you as a result you gain 120 basic attack - Java code no longer scares you!");
 		System.out.printf("Your basic attack is %d now.\n",  hero.getBasicAttack());
 		
 		//Event
 		System.out.println("---------------");
-		hero.setHP(hero.getHP() - 100);
+		hero.removeHP(100);
 		System.out.println("You tip over a cable, you loose 100 hp.");
 		if (hero.getHP() < 0) {
 			return;
@@ -102,6 +103,7 @@ public class LevelSoftUni {
 		return true;
 	}
 	
+	//Need rework!
 	private static boolean isValid(String choice) {
 		System.out.printf("%s is not valid choice, try again!", choice);
 		choice = input.nextLine();
@@ -117,20 +119,20 @@ public class LevelSoftUni {
 	
 	private static Hero battle(Hero hero, CommonEnemy enemy) {
 		while (enemy.getHP() > 0) {
-			System.out.printf("You can attack the %s with basic attack(1), magic attack(2). Witch one shall you use?\n",
+			System.out.printf("You can attack the %s with basic attack(1), magic attack(2) or try to escape(3). Witch one shall you use?\n",
 					enemy.getName());
 			String attackChoice = input.nextLine();
-			while (!attackChoice.equals("1") && !attackChoice.equals("2")) {
+			while (!attackChoice.equals("1") && !attackChoice.equals("2") && !attackChoice.equals("3")) {
 				System.out.printf("%s is not valid choice, try again!", attackChoice);
 				attackChoice = input.nextLine();
 			}
 			switch (attackChoice) {
 			case "1":
 				int damage = hero.getBasicAttack() * rng();
-				enemy.setHP(enemy.getHP() - damage);
+				enemy.removeHP(damage);
 				System.out.printf("You attacked the %s for %d basic damage.\n", enemy.getName(), damage);
 				int enemyDamage = enemy.getBasicAttack() * rng();
-				hero.setHP(hero.getHP() - enemyDamage);
+				hero.removeHP(enemyDamage);
 				System.out.printf("%s strikes you back for %d.\n", enemy.getName(), enemyDamage);
 				battleInfo(hero, enemy);
 				if (!isHeroAlive(hero)) {
@@ -140,15 +142,29 @@ public class LevelSoftUni {
 			case "2":
 				int spellDamage = hero.getAbilityPower() * (3 + rng());
 				hero.setAbilityPower(0);
-				enemy.setHP(enemy.getHP() - spellDamage);
+				enemy.removeHP(spellDamage);
 				System.out.printf("You cast insane Java code in %s's face for %d damage. Your ability power is now 0. Your next spell will do 0 damage, you need to replanish your ability power!\n",
 						enemy.getName(), spellDamage);
 				int enemyDmg = enemy.getBasicAttack() * rng();
-				hero.setHP(hero.getHP() - enemyDmg);
+				hero.removeHP(enemyDmg);
 				System.out.printf("%s strikes you back for %d\n", enemy.getName(), enemyDmg);
 				battleInfo(hero, enemy);
 				if (!isHeroAlive(hero)) {
 					return hero;
+				}
+				break;
+			case "3":
+				if (tryEscape(hero, enemy)) {
+					return hero;
+				}
+				else {
+					int escapeDmg = enemy.getBasicAttack() * rng() * 2;
+					hero.removeHP(escapeDmg);
+					System.out.printf("%s strikes you for %d\n", enemy.getName(), escapeDmg);
+					battleInfo(hero, enemy);
+					if (!isHeroAlive(hero)) {
+						return hero;
+					}
 				}
 				break;
 			}
@@ -157,11 +173,23 @@ public class LevelSoftUni {
 		return hero;
 	}
 
-	private static Hero healerEvent(Hero hero) {
-		hero.setHP(hero.GetMaxHP());
-		System.out.printf("Lord Nakov apears in front of you %s and heals you with magic Java Algorithm. Now you have %d hp and full ability power!\n",
-				hero.getName(), hero.getHP());
+	private static Hero healerEvent(Hero hero, int hpLimit) {
+		if (hero.getHP() <= hpLimit) {
+			hero.resetHP();
+			hero.resetAbilityPower();
+			System.out.printf("Lord Nakov apears in front of you %s and heals you with magic Java Algorithm. Now you have %d hp and full ability power!\n",
+					hero.getName(), hero.getHP());
+		}
 		return hero;
+	}
+	
+	private static boolean tryEscape(Hero hero, CommonEnemy enemy) {
+		if (rng() == 1 && hero.getHP() > enemy.getHP()) {
+			System.out.printf("You've managed to escape the %s, you feel like coward!\n", enemy.getHP());
+			return true;
+		}
+		System.out.println("You failed to escape, better luck next time!");
+		return false;
 	}
 	
 	

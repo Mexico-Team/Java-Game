@@ -30,4 +30,8 @@ public class CommonEnemy {
 	public void setBasicAttack(int basicAttack) {
 		this.basicAttack = basicAttack;
 	}
+	
+	public void removeHP(int value) {
+		setHP(getHP() - value);
+	}
 }
