@@ -7,9 +7,11 @@ public class LevelSoftUni {
 
 	public static void Execute(Hero player) {
 		String choice;
+		int[] directions = new int[2];
 		Hero hero = player;
 		hero.resetHP();
-		// First interaction;
+		
+		// First interaction;		
 		lineSeperator();
 		System.out
 				.println("Evening traveler. Your search is over - you've found the right place.");
@@ -148,8 +150,16 @@ public class LevelSoftUni {
 		}
 
 		// Fourth Interaction
-
-		// Boss fight
+		char[][] maze = getMaze();
+		printMaze(maze);
+		//Start index of hero in maze is 1,1
+		directions[0] = 1;
+		directions[1] = 1;
+		while (true) { //get detections for boss fight;
+			choice = input.nextLine();
+			//input validation
+			directions = move(choice, maze, directions[0], directions[1]);
+		}
 
 	}
 
@@ -288,4 +298,141 @@ public class LevelSoftUni {
 		return hero;
 	}
 
+	private static char[][] getMaze() {
+		//Can be added more mazes
+		char maze[][] = {
+				{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
+				{'|', 'h', '.', '.', 'b', '.', '.', 'b', '|', '-', '-', '|', '|', '/', '|'},
+				{'|', '.', '|', '/', '/', '-', '-', '.', '\\', '.', '-', '|', '/', 'x', '|'},
+				{'|', '.', '|', '/', '|', '.', '.', '.', '.', 'x', '.', '|', '|', '.', '|'},
+				{'|', '.', '.', '|', '|', '.', '|', '|', '|', '/', '.', '.', 'b', '.', '|'},
+				{'|', '\\', 'x', 'b', '|', 'x', '|', '|', '/', '.', '.', '/', '/', '/', '|'},
+				{'|', '\\', '-', '.', '|', '.', '|', '|', '|', '.', '/', '/', '/', '/', '|'},
+				{'|', '-', '\\', '.', '.', '.', '|', 'b', '.', '.', 'p', '|', '|', 'p', '|'},
+				{'|', '-', '|', '.', '.', '.', '-', '-', '.', '|', '.', '|', '|', '.', '|'},
+				{'|', '.', '.', '.', 'x', '.', '|', '|', '.', '|', '.', '|', '|', '.', '|'},
+				{'|', '.', '|', '|', '-', '.', '|', '|', 'b', '|', '.', '|', '|', '.', '|'},
+				{'|', '.', '|', '|', '.', 'b', '|', '|', '.', '|', '.', '.', '.', '.', '|'},
+				{'|', '.', '|', '|', '/', '.', 'p', '|', '.', '|', '.', '-', '.', 'b', '|'},
+				{'|', 'p', '|', '/', '|', '.', '.', '.', '.', '|', '.', 'x', '|', 'e', '|'},
+				{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'}
+		};
+		return maze;
+	}
+	
+	private static int[] move(String direction, char maze[][], int posRow, int posCol) {
+		char nextPosition;
+		int[] directions = new int[2];
+		directions[0] = posRow;
+		directions[1] = posCol;
+		switch (direction) {
+		// Move right;
+		case "1": 
+			nextPosition = maze[posRow][posCol + 1];
+			if (isClear(nextPosition)) {
+				if (isEvent(nextPosition)) {
+					doEvent(nextPosition);
+				}
+				maze[posRow][posCol] = ' ';
+				maze[posRow][posCol + 1] = 'h';
+				directions[0] = posRow;
+				directions[1] = posCol + 1;
+				printMaze(maze);
+			}
+			else {
+				notValidDirection();
+			}
+			break;
+		//Move left;
+		case "2": 
+			nextPosition = maze[posRow][posCol - 1];
+			if (isClear(nextPosition)) {
+				if (isEvent(nextPosition)) {
+					doEvent(nextPosition);
+				}
+				maze[posRow][posCol] = ' ';
+				maze[posRow][posCol - 1] = 'h';
+				directions[0] = posRow;
+				directions[1] = posCol - 1;
+				printMaze(maze);
+			}
+			else {
+				notValidDirection();
+			}
+			break;
+		//Move up;
+		case "3": 
+			nextPosition = maze[posRow - 1][posCol];
+			if (isClear(nextPosition)) {
+				if (isEvent(nextPosition)) {
+					doEvent(nextPosition);
+				}
+				maze[posRow][posCol] = ' ';
+				maze[posRow - 1][posCol] = 'h';
+				directions[0] = posRow - 1;
+				directions[1] = posCol;
+				printMaze(maze);
+			}
+			else {
+				notValidDirection();
+			}
+			break;
+		//Move down;
+		case "4": 
+			nextPosition = maze[posRow + 1][posCol];
+			if (isClear(nextPosition)) {
+				if (isEvent(nextPosition)) {
+					doEvent(nextPosition);
+				}
+				maze[posRow][posCol] = ' ';
+				maze[posRow + 1][posCol]= 'h';
+				directions[0] = posRow + 1;
+				directions[1] = posCol;
+				printMaze(maze);
+			}
+			else {
+				notValidDirection();
+			}
+			break;
+		}
+		return directions;
+	}
+	
+	private static void notValidDirection() {
+		System.out.println("This way is blocked!");
+	}
+	
+	private static boolean isClear(char nextPosition) {
+		return nextPosition != '|' && nextPosition != '-' && nextPosition != '/' && nextPosition != '\\';
+	}
+	
+	private static boolean isEvent(char nextPosition) {
+		return nextPosition == 'x' || nextPosition == 'b' || nextPosition == 'p' || nextPosition == 'e';
+	}
+	
+	private static void doEvent(char nextPosition) {
+		switch (nextPosition) {
+		case 'b':
+			System.out.println("call battle"); //need implementation
+			break;
+		case 'p':
+			System.out.println("call healer"); //need implementation
+			break;
+		case 'x':
+			System.out.println("call random event"); //need implementation
+		break;
+		case 'e':
+			System.out.println("call boss fight"); //need implementation
+		break;
+		}
+	}
+	
+	private static void printMaze(char maze[][]) {
+		for (int row = 0; row < maze.length; row++) {
+			for (int col = 0; col < maze.length; col++) {
+				System.out.print(maze[row][col]);
+			}
+			System.out.println();
+		}
+	}
 }
