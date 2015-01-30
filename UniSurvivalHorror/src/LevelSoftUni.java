@@ -11,7 +11,7 @@ public class LevelSoftUni {
 		boolean validChoice;
 		Hero hero = player;
 		//First interaction;
-		System.out.println("---------------");
+		lineSeperator();
 		System.out.println("Evening traveler. Your search is over - you've found the right place.");
 		System.out.println("You are in the hallway - do you dare entering?\nYes(1), No(2)");
 		choice = input.nextLine();
@@ -41,18 +41,18 @@ public class LevelSoftUni {
 		//Event
 		hero = healerEvent(hero, 800);
 		//Second interaction;
-		System.out.println("---------------");
+		lineSeperator();
 		System.out.println("Your exit is blocked, the only way is forward.");
 
 		
 		//Event
-		System.out.println("---------------");
+		lineSeperator();
 		hero.addHP(1000);
 		System.out.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been.");
 		hpStatus(hero);
 		
 		//Event
-		System.out.println("---------------");
+		lineSeperator();
 		hero.removeHP(100);
 		System.out.println("You stepped over old rusty computer, you loose 100 hp.");
 		if (hero.getHP() < 0) {
@@ -61,13 +61,13 @@ public class LevelSoftUni {
 		hpStatus(hero);
 		
 		//Event
-		System.out.println("---------------");
+		lineSeperator();
 		hero.addBasicAttack(120);
 		System.out.println("You meet Sto, he tries to explain Linux to you as a result you gain 120 basic attack - Java code no longer scares you!");
 		System.out.printf("Your basic attack is %d now.\n",  hero.getBasicAttack());
 		
 		//Event
-		System.out.println("---------------");
+		lineSeperator();
 		hero.removeHP(100);
 		System.out.println("You tip over a cable, you loose 100 hp.");
 		if (hero.getHP() < 0) {
@@ -102,6 +102,9 @@ public class LevelSoftUni {
 		return true;
 	}
 	
+	private static void lineSeperator() {
+		System.out.println("---------------");
+	}
 	
 	//Need rework!
 	private static boolean isValid(String choice) {
@@ -135,6 +138,7 @@ public class LevelSoftUni {
 				hero.removeHP(enemyDamage);
 				System.out.printf("%s strikes you back for %d.\n", enemy.getName(), enemyDamage);
 				battleInfo(hero, enemy);
+				lineSeperator();
 				if (!isHeroAlive(hero)) {
 					return hero;
 				}
@@ -149,6 +153,7 @@ public class LevelSoftUni {
 				hero.removeHP(enemyDmg);
 				System.out.printf("%s strikes you back for %d\n", enemy.getName(), enemyDmg);
 				battleInfo(hero, enemy);
+				lineSeperator();
 				if (!isHeroAlive(hero)) {
 					return hero;
 				}
