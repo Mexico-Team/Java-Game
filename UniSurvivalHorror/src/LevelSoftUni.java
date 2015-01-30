@@ -24,8 +24,8 @@ public class LevelSoftUni {
 						, hero.getBasicAttack() );
 				break;
 			case "2":
-				System.out.println("You try to escape, but you are attacked by Angry Mob.");
-				CommonEnemy mob = new CommonEnemy("Angry Mod", 500, 50);
+				CommonEnemy mob = new CommonEnemy("Angry Mob", 500, 50);
+				System.out.printf("You try to escape, but you are attacked by %s.\n", mob.getName());
 				//Event
 				hero = battle(hero, mob);
 				if (hero.getHP() < 0) {
@@ -33,13 +33,12 @@ public class LevelSoftUni {
 				}
 				break;
 			default:
-				validChoice = isValid(choice);
+				validChoice = isValid(choice); //Need rework!
 				break;
 			}
 			break;
 		}
 		//Event
-		System.out.println("---------------");
 		hero = healerEvent(hero, 800);
 		//Second interaction;
 		System.out.println("---------------");
@@ -102,6 +101,7 @@ public class LevelSoftUni {
 		}
 		return true;
 	}
+	
 	
 	//Need rework!
 	private static boolean isValid(String choice) {
