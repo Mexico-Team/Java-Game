@@ -2,6 +2,7 @@
 public class Hero {
 	private String name;
 	private int maximumHealthPoints;
+	private int maximumAbilityPower;
 	private int healthPoints;
 	private int basicAttack;
 	private int abilityPower;
@@ -13,6 +14,7 @@ public class Hero {
 		this.healthPoints = HP;
 		this.basicAttack = basicAttack;
 		this.abilityPower = abilityPower;
+		this.maximumAbilityPower = abilityPower;
 	}
 	
 	//Methods
@@ -50,6 +52,30 @@ public class Hero {
 
 	public void setAbilityPower(int abilityPower) {
 		this.abilityPower = abilityPower;
+	}
+	
+	public int getMaximumAbilityPower() {
+		return maximumAbilityPower;
+	}
+	
+	public void addHP(int value) {
+		setHP(getHP() + value);
+	}
+	
+	public void removeHP(int value) {
+		setHP(getHP() - value);
+	}
+	
+	public void resetHP() {
+		setHP(GetMaxHP());
+	}
+	
+	public void addBasicAttack(int value) {
+		setBasicAttack(getBasicAttack() + value);
+	}
+	
+	public void resetAbilityPower() {
+		setAbilityPower(getMaximumAbilityPower());
 	}
 	
 }
