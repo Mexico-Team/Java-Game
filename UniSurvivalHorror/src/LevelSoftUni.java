@@ -55,10 +55,10 @@ public class LevelSoftUni {
 		lineSeperator();
 		hero.removeHP(100);
 		System.out.println("You stepped over old rusty computer, you loose 100 hp.");
+		hpStatus(hero);
 		if (hero.getHP() < 0) {
 			return;
 		}
-		hpStatus(hero);
 		
 		//Event
 		lineSeperator();
@@ -70,10 +70,10 @@ public class LevelSoftUni {
 		lineSeperator();
 		hero.removeHP(100);
 		System.out.println("You tip over a cable, you loose 100 hp.");
+		hpStatus(hero);
 		if (hero.getHP() < 0) {
 			return;
 		}
-		hpStatus(hero);
 		
 	}
 	
@@ -117,7 +117,12 @@ public class LevelSoftUni {
 	}
 	
 	private static void hpStatus(Hero hero) {
-		System.out.printf("%s now has %d hp!\n", hero.getName(), hero.getHP());
+		if (hero.getHP() <= 0) {
+			System.out.println("You DEAD!");
+		}
+		else {
+			System.out.printf("%s now has %d hp!\n", hero.getName(), hero.getHP());
+		}
 	}
 	
 	private static Hero battle(Hero hero, CommonEnemy enemy) {
