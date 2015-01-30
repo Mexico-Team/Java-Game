@@ -111,7 +111,7 @@ public class LevelSoftUni {
 
 		// Third Interaction
 		System.out
-				.printf("You've managed to kill %d zombies. How do you feel? Good(1), OK(2), Bad(3)",
+				.printf("You've managed to deal with %d zombies. How do you feel? Good(1), OK(2), Bad(3)",
 						rand);
 		choice = input.nextLine();
 		choice = isValid(choice);
@@ -119,10 +119,12 @@ public class LevelSoftUni {
 		case "1":
 			// Event
 			lineSeperator();
-			hero.addHP(1000);
-			System.out
-					.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been.");
+			hero.removeHP(100);
+			System.out.println("You tip over a cable, you loose 100 hp.");
 			hpStatus(hero);
+			if (hero.getHP() < 0) {
+				return;
+			}
 			break;
 		case "2":
 			// Event
@@ -138,12 +140,10 @@ public class LevelSoftUni {
 		case "3":
 			// Event
 			lineSeperator();
-			hero.removeHP(100);
-			System.out.println("You tip over a cable, you loose 100 hp.");
+			hero.addHP(1000);
+			System.out
+					.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been.");
 			hpStatus(hero);
-			if (hero.getHP() < 0) {
-				return;
-			}
 			break;
 		}
 
