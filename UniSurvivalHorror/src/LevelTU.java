@@ -12,6 +12,8 @@ public class LevelTU {
 		System.out.println("Choose between starting at section 1 or section 2 of TU,by typing 1 or 2");
 		
 		String choice1=input.nextLine();
+		//region choice1S
+		
 		switch(choice1){
 		case "1":
 			System.out.println("Section 1,the enterance:");
@@ -22,6 +24,7 @@ public class LevelTU {
 			System.out.println("Type 1 to use basic attack or type 2 for ability");
 			String choice21=input.nextLine();
 			switch(choice21){
+			//region choice2c1
 			case "1":
 				System.out.println("The batka has durable addidas armor allowing him "
 						+ "to tank several of your hits and you loose 300hp");
@@ -43,6 +46,7 @@ public class LevelTU {
 							+ " you did managed to take out baba de6ka..which is nice I guess");
 					
 					break;
+					//endregion choice2c1
 				case"2":
 					System.out.println("The vile creature shows no vulnerability to your"
 							+ " powerfull abilities and it completely devours you!");
@@ -123,11 +127,137 @@ public class LevelTU {
 			break;
 		case "2":
 			System.out.println("Section 2,the enterance:");
+			System.out.println("You are now faced with a choice of either going towards "
+					+ " the math cabinet(1),the toilets(2) or the computer room(3)");
+			String choice22=input.nextLine();
+			switch(choice22){
+			case "1":
+				System.out.println("You head towards the math cabinet and you see a sign saying:");
+				System.out.println("This is baba de6ka's lair!");
+				System.out.println("Before you continue heading down the hallway "
+						+ " covered in organic creep you are faced with a choice what weapons to take");
+				System.out.println("You can choose between a bomb(1) and a flamethrower(2)");
+				String choice321=input.nextLine();
+				switch(choice321){
+				case "1":
+					System.out.println("You picked up the bomb and went down the creepy hallway");
+					System.out.println("You are surrounded by baba de6ka's unhatched eggs everywhere "
+							+ "you must be very silent and carefull not to wake the buggers up");
+					System.out.println("One of the eggs is starting to hatch right next to you!");
+					System.out.println("Do you keep walking(1) or do you look at the egg(2)");
+					String choice4321=input.nextLine();
+					switch(choice4321){
+					case "1":
+						System.out.println("You get past the egg and you are almost to the safe room.");
+						System.out.println("But suddenly baba de6ka unburrows from the ground,zerg style, "
+								+ "and starts rolling towards you,like a baneling");
+						System.out.println("You throw the bomb at her and you blow up everything "
+								+ "including yourself!");
+						System.out.println("You are dead now "+hero.getName()
+								+ " but atleast you killed the nasty baba de6ka and stoped "
+								+ "her unholy infestation,which is nice I guess...");
+								
+						break;
+					case "2":
+						System.out.println("The egg hatches and a little baba de6ling jumps on your face!");
+						System.out.println("Game over man,GAME OVER!");
+						break;
+					default:
+						System.out.println("English DO U SPEAK IT?!Type 1 or 2!");
+						break;
+					}
+					break;
+				case "2":
+					System.out.println("You picked up the flamethrower and went down the creepy hallway");
+					System.out.println("You are surrounded by baba de6ka's unhatched eggs everywhere "
+							+ "you must be very silent and carefull not to wake the buggers up");
+					System.out.println("One of the eggs is starting to hatch right next to you!");
+					System.out.println("Do you keep walking(1) or do you look at the egg(2)");
+					String choice4322=input.nextLine();
+					switch(choice4322){
+					case "1":
+						System.out.println("You get past the egg and you are almost to the safe room.");
+						System.out.println("But suddenly baba de6ka unburrows from the ground,zerg style, "
+								+ "and starts rolling towards you,like a baneling");
+						System.out.println("You pull out your flame thrower and set everything on fire!");
+						System.out.println("Sadly the chubby beast survives your flames and cries out:");
+						System.out.println("You killed my children,I will have your soul for this "+hero.getName());
+						System.out.println("You suffer a fate much worse than death as baba de6ka devours you!");
+						break;
+					case"2":
+						System.out.println("The egg hatches and a little baba de6ling jumps on your face!");
+						System.out.println("Game over man,GAME OVER!");
+						break;
+					default:
+						System.out.println("English DO U SPEAK IT?!Type 1 or 2!");
+						break;
+						
+					}
+					break;
+				default:
+					System.out.println("English DO U SPEAK IT?!Type 1 or 2!");
+					break;
+				}
+				break;
+			case "2":
+				System.out.println("You head towards the toilets and open the toilets door");
+				System.out.println("A dense green mist quickly surround you!");
+				System.out.println("You start gasping for air butt the smell is just too strong");
+				System.out.println("You die a slow agonizing death "+hero.getName());
+				break;
+			case "3":
+				System.out.println("You safely reached the computer room");
+				System.out.println("As you open the door,Oleg the zombified 90y old coder charges at you"
+						+ " ,grabs you,and pushes you against the wall ");
+				System.out.println("He starts to speak in your face and in the proccess wets your face with "
+						+ "his disgusting juices:");
+				System.out.println("Riddle me this "+hero.getName()+" how does a true coder code?");
+				System.out.println("Does he writes the code on paper(1) or on a computer(2)?");
+				String choice323=input.nextLine();
+				switch(choice323){
+				case "1":
+					System.out.println("You write code on paper,very well,you are a true coder "
+							+ "of the TU clan");
+					System.out.println("I shall ask one more question of you and if you answer "
+							+ "corrently I will let you go");
+					System.out.println("How much is 1+1?");
+					String choice4323=input.nextLine();
+					switch(choice4323){
+					case "SourceCodeMagic":
+						System.out.println("You cheated "+hero.getName()+"! You really are a student of TU!");
+						System.out.println("Remember when I told you I was going to let you go?");
+						System.out.println("You look at the old zombie coder and say yes with a "
+								+ " trembling voice");
+						System.out.println("Oleg stares at you and says:I LIED!!!");
+						System.out.println("He than drags you to his lair where he tortures "
+								+ " you for days before you die.");
+						break;
+					default:
+						System.out.println("WRONG!");
+						System.out.println("Oleg rips out your heart and you die");
+						break;
+					}
+					break;
+				case "2":
+					System.out.println("You write code on a computer,are you retarded!");
+					System.out.println("You are obviously not a student of TU!");
+					System.out.println("Oleg rips out your spine and you are now dead "+hero.getName());
+					break;
+				default:
+					System.out.println("English DO U SPEAK IT?!Type 1 or 2!");
+					break;
+				}
+				break;
+			default:
+				System.out.println("English DO U SPEAK IT?!Type 1 or 2!");
+				break;
+			}
 			break;
 		default:
 			System.out.println("English DO U SPEAK IT?!Type 1 or 2!");
 			break;
 		}
+		//endregion choice1S
 
 }
 }
