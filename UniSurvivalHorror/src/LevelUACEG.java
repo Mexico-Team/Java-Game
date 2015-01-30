@@ -1,11 +1,24 @@
 import java.util.Scanner;
 
+// To make the battle
+// To make "Game over" ??
+// To use the tree characteristics (HP, basicAttack, abilityPower) in the battle
+// To make the STORY!
+// ...
+
+
 public class LevelUACEG {
 	public static void Execute(Hero player){
 
-		Scanner input=new Scanner(System.in);
-			
+		Scanner input = new Scanner(System.in);
+		
 		Hero hero = player;
+		
+		CommonEnemy enemyBossYoda = new CommonEnemy("Master Yoda", 800, 90);
+		CommonEnemy enemyBaDka = new CommonEnemy("Bourgaska BaDka", 400, 80);
+		CommonEnemy enemyPikachu = new CommonEnemy("Pikachu", 70, 30);
+		
+		
 		System.out.println("Welcome to University of Sodom and Gomorrah!\n"
 				+ "University of Architecture, Civil Engineering and Geodesy!");
 
@@ -13,109 +26,439 @@ public class LevelUACEG {
 		System.out.println("Builder of the Justice (Press 1), "
 				+ "Geodesist defining the Earth processes (Press 2) or "
 				+ "HyrdoMan controlling the Water");
-			
-		String choice=input.nextLine();
+					
 		
+		String choice = input.nextLine();
 		switch(choice){
-		// Builder of the Justice ---------------------------------------------------------------------
-		case "1":
-			System.out.println("Good choice! Builders of Justice are very important in hole Universe! :D "
-					+ "But because it's very hard you have to pay with your blood for stuDYING.\n"
-					+ "-100hp "); // ? 100	
-			hero.setHP(hero.getHP() - 100);
-			
+		
+		case "1": // Builder of the Justice ----------------------------------------------------
+			System.out.println("Good choice! Builders of Justice are very important in whole Universe! :D"); 
+						
 			System.out.println("You have the power to control the Physics of the Universe (Press 1) or "
 					+ "the Math algorithms of the Universe (Press 2)");
 			
 			String choice1=input.nextLine();
 			switch (choice1) {
-			// 1. The Physics
+			
 			case "1":
-				System.out.println("You don't have time for everything. The Physics is too hard so you have to choose:\n"
-						+ "You will study hard (Press 1) or cheat (Press2)? ]:)");
+				bonusAbilityPower(hero);
+				battle (hero, enemyBaDka);
 				
 				String choice11 = input.nextLine();
 				switch (choice11) {
 				
-				// 1.1. Study
 				case "1":
-					hero.setHP(hero.getHP() - 20);
-					hero.setAbilityPower(hero.getAbilityPower() + 30);
-					hero.setBasicAttack(hero.getBasicAttack() + 20);
-					System.out.println("Lol you are hard worker! Your pain will be worth it! "
-							+ "You win +30 to your Ability Power and +20 to your Basic Attack!\n"
-							+ ""); // Next case ???			
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyPikachu);
+					
+					String choice111 = input.nextLine();
+					switch (choice111) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBossYoda);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
 					break;
 					
-				// 1.1. Cheat	
 				case "2": 
-
-					hero.setHP(hero.getHP() - 20);
-					hero.setAbilityPower(hero.getAbilityPower() - 30);
-					hero.setBasicAttack(hero.getBasicAttack() - 20);
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyBossYoda);
 					
-					System.out.println("Lol you are lazzzyyy asss babe! You will go to Hell for this dirty cheating!! "
-							+ "Da professor catch youu!"
-							+ "You lost -30 from your Ability Power and -20 from your Basic Attack! :pPppPpp\n"
-							+ ""); // Next case ???
+					String choice112 = input.nextLine();
+					switch (choice112) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBaDka);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
 					break;
 				}
-
 				break;
 				
-			// 2. The Math
 			case "2":
-				System.out.println("You don't have time for everything. The Physics is too hard so you have to choose:\n"
-						+ "You will study hard (Press 1) or cheat (Press 2)? ]:)");
+				bonusAbilityPower(hero);
+				battle (hero, enemyBaDka);
 				
 				String choice12 = input.nextLine();
 				switch (choice12) {
-				
-				// 1.2. Study
 				case "1":
-					hero.setHP(hero.getHP() - 20);
-					hero.setAbilityPower(hero.getAbilityPower() + 30);
-					hero.setBasicAttack(hero.getBasicAttack() + 20);
-					System.out.println("Lol you are hard worker! Your pain will be worth it! "
-							+ "You win +30 to your Ability Power and +20 to your Basic Attack!\n"
-							+ ""); // Next case ???			
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyPikachu);
+					
+					String choice121 = input.nextLine();
+					switch (choice121) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBossYoda);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
 					break;
 					
-				// 1.2. Cheat	
 				case "2": 
-
-					hero.setHP(hero.getHP() - 20);
-					hero.setAbilityPower(hero.getAbilityPower() - 30);
-					hero.setBasicAttack(hero.getBasicAttack() - 20);
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyBossYoda);
 					
-					System.out.println("Lol you are lazzzyyy asss babe! You will go to Hell for this dirty cheating!! "
-							+ "Da professor catch youu!"
-							+ "You lost -30 from your Ability Power and -20 from your Basic Attack! :pPppPpp\n"
-							+ ""); // Next case ???
+					String choice122 = input.nextLine();
+					switch (choice122) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBaDka);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
 					break;
 				}
-				
-				break;	
+				break;
 			}
 			
-			// Geodesist defining the Earth processes -------------------------------------------------
+		// =========================================================================================================
+		case "2": // Geodesist defining the Earth processes ----------------------------------------------------
+			System.out.println("Good choice! Builders of Justice are very important in whole Universe! :D"); 
+						
+			System.out.println("You have the power to control the Physics of the Universe (Press 1) or "
+					+ "the Math algorithms of the Universe (Press 2)");
 			
-			// HyrdoMan controlling the Water ---------------------------------------------------------
+			String choice2 = input.nextLine();
+			switch (choice2) {
+			case "1":
+				bonusAbilityPower(hero);
+				battle (hero, enemyBaDka);
 				
+				String choice21 = input.nextLine();
+				switch (choice21) {
+				case "1":
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyPikachu);
+					
+					String choice211 = input.nextLine();
+					switch (choice211) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBossYoda);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
+					break;
+					
+				case "2": 
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyBossYoda);
+					
+					String choice212 = input.nextLine();
+					switch (choice212) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBaDka);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
+					break;
+				}
+				break;
+				
+			case "2":
+				bonusAbilityPower(hero);
+				battle (hero, enemyBaDka);
+				
+				String choice22 = input.nextLine();
+				switch (choice22) {
+				case "1":
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyPikachu);
+					
+					String choice221 = input.nextLine();
+					switch (choice221) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBossYoda);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
+					break;
+					
+				case "2": 
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyBossYoda);
+					
+					String choice222 = input.nextLine();
+					switch (choice222) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBaDka);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
+					break;
+				}
+				break;
+			}
+			
+			
+		// =====================================================================================================
+		case "3": // HyrdoMan controlling the Water ----------------------------------------------------
+			System.out.println("Good choice! Builders of Justice are very important in whole Universe! :D"); 
+						
+			System.out.println("You have the power to control the Physics of the Universe (Press 1) or "
+					+ "the Math algorithms of the Universe (Press 2)");
+			
+			String choice3 = input.nextLine();
+			switch (choice3) {
+			case "1":
+				bonusAbilityPower(hero);
+				battle (hero, enemyBaDka);
+				
+				String choice31 = input.nextLine();
+				switch (choice31) {
+				case "1":
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyPikachu);
+					
+					String choice311 = input.nextLine();
+					switch (choice311) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBossYoda);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
+					break;
+					
+				case "2": 
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyBossYoda);
+					
+					String choice312 = input.nextLine();
+					switch (choice312) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBaDka);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
+					break;
+				}
+				break;
+
+			case "2":
+				bonusAbilityPower(hero);
+				battle (hero, enemyBaDka);
+			
+				String choice32 = input.nextLine();
+				switch (choice32) {
+				case "1":
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyPikachu);
+					
+					String choice321 = input.nextLine();
+					switch (choice321) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBaDka);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyPikachu);
+						break;
+					}
+					break;
+					
+				case "2": 
+					System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+							+ "....................................");
+					bonusAbilityPower(hero);
+					battle (hero, enemyBossYoda);
+					
+					String choice322 = input.nextLine();
+					switch (choice322) {
+					case "1":
+						System.out.println("You passed the first Battle." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBossYoda);
+						break;
+
+					case "2":
+						System.out.println("You passed the first Battle. Your journey is just begun." // Ah.. oh.. Pokemonnn
+								+ "....................................");
+						bonusAbilityPower(hero);
+						battle (hero, enemyBaDka);
+						break;
+					}
+					break;
+				}
+				break;
+			}			
 		}
 	}
+	
+	
+	// Bonus!
+	private static void bonusAbilityPower(Hero hero) {
+		
+		int randomNumBonus = 20 + (int)(Math.random()*100);
+		int heroHp = hero.getHP() + randomNumBonus;		
+		System.out.printf("Becouse of your choice, %2$s won %1$d hp\n"
+				+ "--------------> %2$s has %3$d hp left.\n", 
+				randomNumBonus, hero.getName(), heroHp);
+	}
+	
+	
+	// Battle
+	// With help from https://github.com/SimeonStoykov
+	public static void battle(Hero hero, CommonEnemy enemy) {
+		Scanner input = new Scanner(System.in);
+		int enemyHp = enemy.getHP();
+		int heroHp = hero.getHP();
+		int enemyBasicAttack = enemy.getBasicAttack();
+		int heroBasicAttack = hero.getBasicAttack();
+		int randomNumAttack = 40 + (int)(Math.random()*180);
+		
+		while (true) {
+			System.out.println("Battlee! Prepare yourself! :D\n"
+					+ "What do you want to do? If you want to use normal attack - Press \"1\"."
+					+ "If you want to use your ability power - Press \"2\"");
+			
+			int choicePlayer = Integer.parseInt(input.nextLine());		
+			switch (choicePlayer) {
+			// Basic attack -----------------------------------------------------
+			case 1: {
+				int basicAttack = (heroBasicAttack - enemyBasicAttack + randomNumAttack);
+				enemyHp -= basicAttack;
+				if (enemyHp < 0) {
+					enemyHp = 0;
+				}
+				System.out.printf("%1$s kicked  %2$s's ass with %3$d damage.\n"
+						+ "--------------> %2$s has %4$d hp left.\n",
+						hero.getName(), enemy.getName(), basicAttack, enemyHp);	
+			}
+			break;
+			
+			// Ability power ----------------------------------------------------
+			case 2: {
+				int AbilityAttack = (heroBasicAttack - enemyBasicAttack + randomNumAttack);
+				enemyHp -= AbilityAttack;
+			}
+			break;
+			default:
+				break;
+			}
+			if (enemyHp == 0) {
+				hero.setHP(heroHp);
+				System.out.printf("You killed %s!\n", enemy.getName());
+				break;
+			}
+								
+		}			
+	}
+	
 }
-
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
