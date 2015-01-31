@@ -4,161 +4,50 @@ import java.util.Scanner;
 public class LevelSoftUni {
 
 	private static Scanner input = new Scanner(System.in);
-
+	private static Hero hero;
+	private static String choice;
+	
 	public static void Execute(Hero player) {
-		String choice;
-		int[] directions = new int[2];
-		Hero hero = player;
+		int[] directions = new int[2]; //dupricated;
+		hero = player;
 		hero.resetHP();
 		
-		// First interaction;		
-		lineSeperator();
-		System.out
-				.println("Evening traveler. Your search is over - you've found the right place.");
-		System.out
-				.println("You are in the hallway - do you dare entering?\nYes(1), No(2), Maybe?(3)");
-		choice = input.nextLine();
-		choice = isValid(choice);
-		switch (choice) {
-		case "1":
-			hero.addBasicAttack(30);
-			System.out
-					.printf("Lord Nakov commands you for your bravery and he gave you old rusty keyboard to defend yourself. You gained 30 basic attack and now have %s basic attack.\n",
-							hero.getBasicAttack());
-			break;
-		case "2":
-			CommonEnemy mob = new CommonEnemy("Angry Mob", 500, 50);
-			System.out.printf(
-					"You try to escape, but you are attacked by %s.\n",
-					mob.getName());
-			// Event
-			hero = battle(hero, mob);
-			if (hero.getHP() < 0) {
-				return;
-			}
-			break;
-		case "3":
-			CommonEnemy ghost = new CommonEnemy("Angry Ghost", 1000, 50);
-			System.out
-					.printf("While you think about the meaning of life and what not you are attacked by %s.\n",
-							ghost.getName());
-			// Event
-			hero = battle(hero, ghost);
-			if (hero.getHP() < 0) {
-				return;
-			}
-			break;
-		}
-		// Event
-		hero = healerEvent(hero, 700);
-
-		// Second interaction;
-		lineSeperator();
-		System.out.println("Your exit is blocked, the only way is forward.");
-		// Event
-		lineSeperator();
-		hero.addBasicAttack(120);
-		System.out
-				.println("You meet Sto, he tries to explain Linux to you as a result you gain 120 basic attack - Java code no longer scares you!");
-		System.out.printf("Your basic attack is %d now.\n",
-				hero.getBasicAttack());
-		lineSeperator();
-		System.out
-				.println("You can use your new coding powers for GOOD(1) or for EVEL(2)...or for fun(3)...witch one you choose?");
-		choice = input.nextLine();
-		choice = isValid(choice);
-		int rand = rng() + 4;
-		System.out.printf(
-				"You are attacked by a pack of zombies. They are %d.\n", rand);
-		for (int i = 0; i < rand; i++) {
-			CommonEnemy zombie = new CommonEnemy("Zombie" + i, 350, 100);
-			System.out
-					.printf("%s is infront of you. You can Scream(1), Fight(2), Pray(3) - what you do?\n",
-							zombie.getName());
-			choice = input.nextLine();
-			choice = isValid(choice);
-			switch (choice) {
-			case "1":
-				hero.removeHP(100);
-				System.out.printf(
-						"Screaming scared %s, but you loose 100 hp\n",
-						zombie.getName());
-				hpStatus(hero);
-				if (hero.getHP() < 0) {
-					return;
-				}
-				break;
-			case "2":
-				System.out.printf("You engage %s in battle.\n",
-						zombie.getName());
-				// Event
-				hero = battle(hero, zombie);
-				if (hero.getHP() < 0) {
-					return;
-				}
-				break;
-			case "3":
-				healerEvent(hero, hero.getHP());
-				System.out.printf("Renewed and inspired you attack %s.\n",
-						zombie.getName());
-				// Event
-				hero = battle(hero, zombie);
-				if (hero.getHP() < 0) {
-					return;
-				}
-				break;
-			}
-			lineSeperator();
+		//Need fix!
+		/*You attacked the Maze Guard for 500 basic damage.
+		Maze Guard strikes you back for 480.
+		1 has -460 hp left, Maze Guard has no hp left.*/
+		
+		// First interaction - done;	
+		entry();
+		if (hero.isDead()) {
+			return;
 		}
 
-		// Third Interaction
-		System.out
-				.printf("You've managed to deal with %d zombies. How do you feel? Good(1), OK(2), Bad(3)",
-						rand);
-		choice = input.nextLine();
-		choice = isValid(choice);
-		switch (choice) {
-		case "1":
-			// Event
-			lineSeperator();
-			hero.removeHP(100);
-			System.out.println("You tip over a cable, you loose 100 hp.");
-			hpStatus(hero);
-			if (hero.getHP() < 0) {
-				return;
-			}
-			break;
-		case "2":
-			// Event
-			lineSeperator();
-			hero.removeHP(100);
-			System.out
-					.println("You stepped over old rusty computer, you loose 100 hp.");
-			hpStatus(hero);
-			if (hero.getHP() < 0) {
-				return;
-			}
-			break;
-		case "3":
-			// Event
-			lineSeperator();
-			hero.addHP(1000);
-			System.out
-					.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been.");
-			hpStatus(hero);
-			break;
+		// Second interaction - done;
+		wayIn();
+		if (hero.isDead()) {
+			return;
+		}
+		
+		// Third Interaction - done;
+		specialEvent();
+		if (hero.isDead()) {
+			return;
 		}
 
-		// Fourth Interaction
+		// Fourth Interaction - need random events and boss
 		char[][] maze = getMaze();
 		printMaze(maze);
 		//Start index of hero in maze is 1,1
-		directions[0] = 1;
-		directions[1] = 1;
+		directions[0] = 1; //dupricated
+		directions[1] = 1; //dupricated
 		while (true) { //get detections for boss fight;
 			choice = input.nextLine();
 			//input validation
-			directions = move(choice, maze, directions[0], directions[1]);
+			directions = move(choice, maze, directions[0], directions[1]); //need fixing
+			if (hero.isDead()) {
+				return;
+			}
 		}
 
 	}
@@ -196,19 +85,15 @@ public class LevelSoftUni {
 		if (enemy.getHP() <= 0) {
 			System.out.printf("%s has %d hp left, %s has no hp left.\n",
 					hero.getName(), hero.getHP(), enemy.getName());
-		} else {
+		}
+		else if(hero.isDead()){
+			System.out.println("You are no more, songs will be written in your honor!");
+		}
+		else {
 			System.out.printf("%s has %d hp left, %s has %d hp left.\n",
 					hero.getName(), hero.getHP(), enemy.getName(),
 					enemy.getHP());
 		}
-	}
-
-	private static boolean isHeroAlive(Hero hero) {
-		if (hero.getHP() < 0) {
-			System.out.println("Level Over!");
-			return false;
-		}
-		return true;
 	}
 
 	private static boolean tryEscape(Hero hero, CommonEnemy enemy) {
@@ -222,12 +107,13 @@ public class LevelSoftUni {
 		return false;
 	}
 
-	private static Hero battle(Hero hero, CommonEnemy enemy) {
+	private static void battle(Hero hero, CommonEnemy enemy) {
 		while (enemy.getHP() > 0) {
 			System.out
 					.printf("You can attack the %s with basic attack(1), magic attack(2) or try to escape(3). Witch one shall you use?\n",
 							enemy.getName());
 			String attackChoice = input.nextLine();
+			//Validation;
 			while (!attackChoice.equals("1") && !attackChoice.equals("2")
 					&& !attackChoice.equals("3")) {
 				System.out.printf("%s is not valid choice, try again!",
@@ -246,8 +132,8 @@ public class LevelSoftUni {
 						enemy.getName(), enemyDamage);
 				battleInfo(hero, enemy);
 				lineSeperator();
-				if (!isHeroAlive(hero)) {
-					return hero;
+				if (hero.isDead()) {
+					return;
 				}
 				break;
 			case "2":
@@ -263,49 +149,187 @@ public class LevelSoftUni {
 						enemy.getName(), enemyDmg);
 				battleInfo(hero, enemy);
 				lineSeperator();
-				if (!isHeroAlive(hero)) {
-					return hero;
+				if (hero.isDead()) {
+					return;
 				}
 				break;
 			case "3":
 				if (tryEscape(hero, enemy)) {
-					return hero;
+					return;
 				} else {
 					int escapeDmg = enemy.getBasicAttack() * rng() * 2;
 					hero.removeHP(escapeDmg);
 					System.out.printf("%s strikes you for %d\n",
 							enemy.getName(), escapeDmg);
 					battleInfo(hero, enemy);
-					if (!isHeroAlive(hero)) {
-						return hero;
+					if (hero.isDead()) {
+						return;
 					}
 				}
 				break;
 			}
 		}
 		System.out.printf("%s is no more!\n", enemy.getName());
-		return hero;
+		hpStatus(hero);
 	}
 
-	private static Hero healerEvent(Hero hero, int hpLimit) {
+	private static void healerEvent(Hero hero, int hpLimit) {
 		if (hero.getHP() <= hpLimit) {
 			hero.resetHP();
 			hero.resetAbilityPower();
-			System.out
-					.printf("Lord Nakov apears in front of you %s and heals you with magic Java Algorithm. Now you have %d hp and full ability power!\n",
+			System.out.printf("Lord Nakov apears in front of you %s and heals you with magic Java Algorithm. Now you have %d hp and full ability power!\n",
 							hero.getName(), hero.getHP());
 		}
-		return hero;
+		return;
+	}
+	
+	private static void entry() {
+		lineSeperator();
+		System.out
+				.println("Evening traveler. Your search is over - you've found the right place.");
+		System.out
+				.println("You are in the hallway - do you dare entering?\nYes(1), No(2), Maybe?(3)");
+		choice = input.nextLine();
+		choice = isValid(choice);
+		switch (choice) {
+		case "1":
+			hero.addBasicAttack(30);
+			System.out
+					.printf("Lord Nakov commands you for your bravery and he gave you old rusty keyboard to defend yourself. You gained 30 basic attack and now have %s basic attack.\n",
+							hero.getBasicAttack());
+			break;
+		case "2":
+			CommonEnemy mob = new CommonEnemy("Angry Mob", 500, 50);
+			System.out.printf(
+					"You try to escape, but you are attacked by %s.\n",
+					mob.getName());
+			// Event
+			battle(hero, mob);
+			if (hero.isDead()) {
+				return;
+			}
+			break;
+		case "3":
+			CommonEnemy ghost = new CommonEnemy("Angry Ghost", 1000, 100);
+			System.out
+					.printf("While you think about the meaning of life and what not you are attacked by %s.\n",
+							ghost.getName());
+			// Event
+			battle(hero, ghost);
+			if (hero.isDead()) {
+				return;
+			}
+			break;
+		}
+		// Event
+		healerEvent(hero, 700);
+	}
+	
+	private static void wayIn() {
+		lineSeperator();
+		System.out.println("Your exit is blocked, the only way is forward.");
+		// Event
+		lineSeperator();
+		hero.addBasicAttack(120);
+		System.out
+				.println("You meet Sto, he tries to explain Linux to you as a result you gain 120 basic attack - Java code no longer scares you!");
+		System.out.printf("Your basic attack is %d now.\n",
+				hero.getBasicAttack());
+		lineSeperator();
+		System.out
+				.println("You can use your new coding powers for GOOD(1) or for EVEL(2)...or for fun(3)...witch one you choose?");
+		choice = input.nextLine();
+		choice = isValid(choice);
+		int rand = rng() + 4;
+		System.out.printf(
+				"You are attacked by a pack of zombies. They are %d.\n", rand);
+		for (int i = 0; i < rand; i++) {
+			CommonEnemy zombie = new CommonEnemy("Zombie" + (i + 1), 350, 100);
+			System.out
+					.printf("%s is infront of you. You can Scream(1), Fight(2), Pray(3) - what you do?\n",
+							zombie.getName());
+			choice = input.nextLine();
+			choice = isValid(choice);
+			switch (choice) {
+			case "1":
+				hero.removeHP(100);
+				System.out.printf(
+						"Screaming scared %s, but you loose 100 hp\n",
+						zombie.getName());
+				hpStatus(hero);
+				if (hero.isDead()) {
+					return;
+				}
+				break;
+			case "2":
+				System.out.printf("You engage %s in battle.\n",
+						zombie.getName());
+				// Event
+				battle(hero, zombie);
+				if (hero.isDead()) {
+					return;
+				}
+				break;
+			case "3":
+				healerEvent(hero, hero.getHP());
+				System.out.printf("Renewed and inspired you attack %s.\n",
+						zombie.getName());
+				// Event
+				battle(hero, zombie);
+				if (hero.isDead()) {
+					return;
+				}
+				break;
+			}
+			lineSeperator();
+		}
+	}
+	
+	private static void specialEvent() {
+		System.out.println("You've managed to deal with the enemy. How do you feel? Good(1), OK(2), Bad(3)");
+		choice = input.nextLine();
+		choice = isValid(choice);
+		switch (choice) {
+		case "1":
+			// Event
+			lineSeperator();
+			hero.removeHP(100);
+			System.out.println("You tip over a cable, you loose 100 hp.");
+			hpStatus(hero);
+			if (hero.isDead()) {
+				return;
+			}
+			break;
+		case "2":
+			// Event
+			lineSeperator();
+			hero.removeHP(100);
+			System.out.println("You stepped over old rusty computer, you loose 100 hp.");
+			hpStatus(hero);
+			if (hero.isDead()) {
+				return;
+			}
+			break;
+		case "3":
+			// Event
+			lineSeperator();
+			hero.addHP(1000);
+			System.out.println("You found Introduction to programming with Java, your hp has increased by 1000 for the time been.");
+			hpStatus(hero);
+			break;
+		}
 	}
 
 	private static char[][] getMaze() {
 		//Can be added more mazes
+		lineSeperator();
+		System.out.println("You've entered in to SoftUni - or what it looks like maze now. 'h' mark is you, 'e' is the Boss, 'p' are prayer monuments and 'x' is event - it might be good or bad - who knows (laught) - I know! Good luck hero - you will need it!");
 		char maze[][] = {
 				{'-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'},
 				{'|', 'h', '.', '.', 'b', '.', '.', 'b', '|', '-', '-', '|', '|', '/', '|'},
 				{'|', '.', '|', '/', '/', '-', '-', '.', '\\', '.', '-', '|', '/', 'x', '|'},
 				{'|', '.', '|', '/', '|', '.', '.', '.', '.', 'x', '.', '|', '|', '.', '|'},
-				{'|', '.', '.', '|', '|', '.', '|', '|', '|', '/', '.', '.', 'b', '.', '|'},
+				{'|', 'p', '.', '|', '|', '.', '|', '|', '|', '/', '.', '.', 'b', '.', '|'},
 				{'|', '\\', 'x', 'b', '|', 'x', '|', '|', '/', '.', '.', '/', '/', '/', '|'},
 				{'|', '\\', '-', '.', '|', '.', '|', '|', '|', '.', '/', '/', '/', '/', '|'},
 				{'|', '-', '\\', '.', '.', '.', '|', 'b', '.', '.', 'p', '|', '|', 'p', '|'},
@@ -413,10 +437,17 @@ public class LevelSoftUni {
 	private static void doEvent(char nextPosition) {
 		switch (nextPosition) {
 		case 'b':
-			System.out.println("call battle"); //need implementation
+			//hero.setHP(20); //fix death!
+			int hp = 300 * (rng() + 1);
+			int basicAttack = 80 * (rng() + 1);
+			CommonEnemy enemy = new CommonEnemy("Maze Guard", hp, basicAttack);
+			battle(hero, enemy);
+			if (hero.isDead()) {
+				return;
+			}
 			break;
 		case 'p':
-			System.out.println("call healer"); //need implementation
+			healerEvent(hero, hero.GetMaxHP());
 			break;
 		case 'x':
 			System.out.println("call random event"); //need implementation
