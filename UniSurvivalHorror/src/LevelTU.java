@@ -5,9 +5,9 @@ public class LevelTU {
 		Scanner input=new Scanner(System.in);
 		
 		Hero hero = player;
-		System.out.println("Cogradilations,you choosed poorly!");
+		System.out.println("Congradulations,you choosed poorly!");
 		System.out.println("Surviving the TU joy ride will be impos....not likely...");
-		System.out.println(hero.getName()+" stars with 1000hp,100 attack and 100 ability power");
+		System.out.println(hero.getName()+" starts with 1000hp,100 attack and 100 ability power");
 		System.out.println("You are faced with 2 choices,to begin your horrible journey:");
 		System.out.println("Choose between starting at section 1 or section 2 of TU,by typing 1 or 2");
 		
@@ -20,7 +20,7 @@ public class LevelTU {
 			hero.setHP(900);
 			System.out.println("Immediately a zombifed batka bites your leg and you loose 100hp!");
 			System.out.println("You are faced with a choice to kill the bad zombie batka with your "
-					+ "basic attack or use 30 ability power to smite him down");
+					+ " basic attack or use 30 ability power to smite him down");
 			System.out.println("Type 1 to use basic attack or type 2 for ability");
 			String choice21=input.nextLine();
 			switch(choice21){
@@ -37,18 +37,18 @@ public class LevelTU {
 				String choice31=input.nextLine();
 				switch(choice31){
 				case "1":
-					System.out.println("Your basic attack instantly blows up the obesed monster"
+					System.out.println("Your basic attack instantly blows up the obesed monster "
 							+ "in a gushy fontain of gore!Excellent choice!");
 					System.out.println("You are almost to the safe room now");
 					System.out.println("And than just as you are about to enter boss Nakov drops"
-							+ "from above(like a boss),does 600 dmg,you split in half and die");
+							+ " from above(like a boss),does 600 dmg,you split in half and die");
 					System.out.println("Atleast you did not die in vain "+hero.getName()+""
 							+ " you did managed to take out baba de6ka..which is nice I guess");
 					
 					break;
 					//endregion choice2c1
 				case"2":
-					System.out.println("The vile creature shows no vulnerability to your"
+					System.out.println("The vile creature shows no vulnerability to your "
 							+ " powerfull abilities and it completely devours you!");
 					
 					System.out.println("You die in a brutal agonizing way,game over man,GAME OVER!");
@@ -59,7 +59,7 @@ public class LevelTU {
 				}
 				break;
 			case"2":
-				System.out.println("The batka is quickly defeated,you take his addidas armor"
+				System.out.println("The batka is quickly defeated,you take his addidas armor "
 						+ " and your hp is back to 1000");
 				hero.setHP(1000);	
 				System.out.println("You see a safe room near by and rush towards it.");
@@ -71,10 +71,10 @@ public class LevelTU {
 				switch(choice32){
 				case"1":
 					System.out.println("Your basic attack instantly blows up the obesed monster"
-							+ "in a gushy fontain of gore!Excellent choice!");
+							+ " in a gushy fontain of gore!Excellent choice!");
 					System.out.println("You are almost to the safe room now");
-					System.out.println("And than just as you are about to enter boss Nakov drops"
-							+ "from above(like a boss),does 600 dmg and"
+					System.out.println("And than just as you are about to enter boss Nakov drops "
+							+ "from above(like a boss),does 600 dmg and "
 							+ "leaves you gasping for air");
 					System.out.println("You gather all your ability power and decide to give him "
 							+ "your best shot!");
@@ -87,15 +87,15 @@ public class LevelTU {
 								+ "out your heart");
 						System.out.println("You fool,have you never heard I have ice blood, "
 								+ "I am the the very thing students fear,I am the one who knocks, "
-								+ "I AM DEATH!");
+								+ " I AM DEATH!");
 						System.out.println("As boss Nakov is devouring your soul,"
-								+ "you wish you died earlier");
+								+ " you wish you died earlier");
 						break;
 					case "2":
 						System.out.println("kame...kame..kamEEE...KHAAAAAAAAAAAAA!!!!");
 						System.out.println("You blast lord Nakov with everything you got "
 								+ "and you manage to melt his skin");
-						System.out.println("But underneath the melted flesh you see lord Nakov's"
+						System.out.println("But underneath the melted flesh you see lord Nakov's "
 								+ " metal endoskeleton(with the logo of oracle on it)");
 						System.out.println("His red eyes stare at you and he slowly starts to wiggle your way.");
 						System.out.println("If you want to find out what happens next you need to get the "
