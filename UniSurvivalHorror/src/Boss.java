@@ -45,5 +45,20 @@ public class Boss {
 	public void setSpecialAttack(int specialAttack) {
 		this.specialAttack = specialAttack;
 	}
+	
+	public boolean isDead() {
+		if (this.healthPoints <= 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void addHP(int value) {
+		this.healthPoints += value;
+	}
+	
+	public void removeHP(int value) {
+		this.healthPoints -= value;
+	}
 
 }

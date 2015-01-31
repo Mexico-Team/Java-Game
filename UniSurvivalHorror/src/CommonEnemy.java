@@ -34,4 +34,11 @@ public class CommonEnemy {
 	public void removeHP(int value) {
 		setHP(getHP() - value);
 	}
+	
+	public boolean isDead() {
+		if (this.healthPoints <= 0) {
+			return true;
+		}
+		return false;
+	}
 }
