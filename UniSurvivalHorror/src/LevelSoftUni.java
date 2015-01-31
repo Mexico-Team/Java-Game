@@ -100,7 +100,7 @@ public class LevelSoftUni {
 		if (rng() == 1 && hero.getHP() > enemy.getHP()) {
 			System.out.printf(
 					"You've managed to escape the %s, you feel like coward!\n",
-					enemy.getHP());
+					enemy.getName());
 			return true;
 		}
 		System.out.println("You failed to escape, better luck next time!");
