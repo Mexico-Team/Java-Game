@@ -6,6 +6,8 @@ public class Hero {
 	private int healthPoints;
 	private int basicAttack;
 	private int abilityPower;
+	private int mazeX;
+	private int mazeY;
 
 	//Constructor
 	public Hero(String name, int HP, int basicAttack, int abilityPower){
@@ -15,6 +17,8 @@ public class Hero {
 		this.basicAttack = basicAttack;
 		this.abilityPower = abilityPower;
 		this.maximumAbilityPower = abilityPower;
+		this.mazeX = 1;
+		this.mazeY = 1;
 	}
 	
 	//Methods
@@ -58,24 +62,54 @@ public class Hero {
 		return maximumAbilityPower;
 	}
 	
+	public int getMazeX() {
+		return mazeX;
+	}
+
+	public void setMazeX(int mazeX) {
+		this.mazeX = mazeX;
+	}
+
+	public int getMazeY() {
+		return mazeY;
+	}
+
+	public void setMazeY(int mazeY) {
+		this.mazeY = mazeY;
+	}
+	
 	public void addHP(int value) {
-		setHP(getHP() + value);
+		this.healthPoints += value;
 	}
 	
 	public void removeHP(int value) {
-		setHP(getHP() - value);
+		this.healthPoints -= value;
 	}
 	
 	public void resetHP() {
-		setHP(GetMaxHP());
+		this.healthPoints = this.maximumHealthPoints;
 	}
 	
 	public void addBasicAttack(int value) {
-		setBasicAttack(getBasicAttack() + value);
+		this.basicAttack += value;
+	}
+	
+	public void removeBasicAttack(int value) {
+		this.basicAttack -= value;
+		if (this.basicAttack < 30) {
+			this.basicAttack = 30;
+		}
 	}
 	
 	public void resetAbilityPower() {
-		setAbilityPower(getMaximumAbilityPower());
+		this.abilityPower = this.maximumAbilityPower;
+	}
+	
+	public boolean isDead() {
+		if (this.healthPoints <= 0) {
+			return true;
+		}
+		return false;
 	}
 	
 }
