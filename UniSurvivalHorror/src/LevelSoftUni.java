@@ -8,7 +8,6 @@ public class LevelSoftUni {
 	private static String choice;
 	
 	public static void Execute(Hero player) {
-		int[] directions = new int[2]; //dupricated;
 		hero = player;
 		hero.resetHP();
 		
@@ -34,12 +33,13 @@ public class LevelSoftUni {
 		char[][] maze = getMaze();
 		printMaze(maze);
 		//Start index of hero in maze is 1,1
-		directions[0] = 1; //dupricated
+/*		directions[0] = 1; //dupricated
 		directions[1] = 1; //dupricated
-		while (true) { //get detections for boss fight;
+		
+*/		while (true) { //get detections for boss fight;
 			choice = input.nextLine();
 			//input validation
-			directions = move(choice, maze, directions[0], directions[1]); //need fixing
+			move(choice, maze); //need fixing
 			if (hero.isDead()) {
 				return;
 			}
@@ -421,11 +421,10 @@ public class LevelSoftUni {
 		return maze;
 	}
 	
-	private static int[] move(String direction, char maze[][], int posRow, int posCol) {
+	private static void move(String direction, char maze[][]) {
 		char nextPosition;
-		int[] directions = new int[2];
-		directions[0] = posRow;
-		directions[1] = posCol;
+		int posRow = hero.getMazeY();
+		int posCol = hero.getMazeX();
 		switch (direction) {
 		// Move right;
 		case "1": 
@@ -436,8 +435,7 @@ public class LevelSoftUni {
 				}
 				maze[posRow][posCol] = '.';
 				maze[posRow][posCol + 1] = 'h';
-				directions[0] = posRow;
-				directions[1] = posCol + 1;
+				hero.setMazeX(posCol + 1);
 				printMaze(maze);
 			}
 			else {
@@ -451,10 +449,9 @@ public class LevelSoftUni {
 				if (isEvent(nextPosition)) {
 					doEvent(nextPosition);
 				}
-				maze[posRow][posCol] = ' ';
+				maze[posRow][posCol] = '.';
 				maze[posRow][posCol - 1] = 'h';
-				directions[0] = posRow;
-				directions[1] = posCol - 1;
+				hero.setMazeX(posCol - 1);
 				printMaze(maze);
 			}
 			else {
@@ -468,10 +465,9 @@ public class LevelSoftUni {
 				if (isEvent(nextPosition)) {
 					doEvent(nextPosition);
 				}
-				maze[posRow][posCol] = ' ';
+				maze[posRow][posCol] = '.';
 				maze[posRow - 1][posCol] = 'h';
-				directions[0] = posRow - 1;
-				directions[1] = posCol;
+				hero.setMazeY(posRow - 1);
 				printMaze(maze);
 			}
 			else {
@@ -485,10 +481,9 @@ public class LevelSoftUni {
 				if (isEvent(nextPosition)) {
 					doEvent(nextPosition);
 				}
-				maze[posRow][posCol] = ' ';
+				maze[posRow][posCol] = '.';
 				maze[posRow + 1][posCol]= 'h';
-				directions[0] = posRow + 1;
-				directions[1] = posCol;
+				hero.setMazeY(posRow + 1);
 				printMaze(maze);
 			}
 			else {
@@ -496,7 +491,6 @@ public class LevelSoftUni {
 			}
 			break;
 		}
-		return directions;
 	}
 	
 	private static void notValidDirection() {
@@ -537,7 +531,7 @@ public class LevelSoftUni {
 		break;
 		case 'e':
 			Boss boss = new Boss("The Main Reason", 2500, 100, 200);
-			System.out.printf("%s is in front of you. You are scared like a little girl.\n");
+			System.out.printf("%s is in front of you. You are scared like a little girl.\n", boss.getName());
 			// Event;
 			battle(hero, boss);
 			if (hero.isDead()) {
