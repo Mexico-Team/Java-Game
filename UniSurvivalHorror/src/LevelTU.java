@@ -135,14 +135,14 @@ public class LevelTU {
 				System.out.println("You head towards the math cabinet and you see a sign saying:");
 				System.out.println("This is baba de6ka's lair!");
 				System.out.println("Before you continue heading down the hallway "
-						+ " covered in organic creep you are faced with a choice what weapons to take");
+						+ " ,covered in organic creep,you are faced with a choice what weapons to take.");
 				System.out.println("You can choose between a bomb(1) and a flamethrower(2)");
 				String choice321=input.nextLine();
 				switch(choice321){
 				case "1":
 					System.out.println("You picked up the bomb and went down the creepy hallway");
-					System.out.println("You are surrounded by baba de6ka's unhatched eggs everywhere "
-							+ "you must be very silent and carefull not to wake the buggers up");
+					System.out.println("You are now surrounded by baba de6ka's unhatched eggs "
+							+ "you must be very silent and carefull not to wake the buggers up.");
 					System.out.println("One of the eggs is starting to hatch right next to you!");
 					System.out.println("Do you keep walking(1) or do you look at the egg(2)");
 					String choice4321=input.nextLine();
@@ -168,9 +168,9 @@ public class LevelTU {
 					}
 					break;
 				case "2":
-					System.out.println("You picked up the flamethrower and went down the creepy hallway");
-					System.out.println("You are surrounded by baba de6ka's unhatched eggs everywhere "
-							+ "you must be very silent and carefull not to wake the buggers up");
+					System.out.println("You picked up the flamethrower and went down the creepy hallway.");
+					System.out.println("You are now surrounded by baba de6ka's unhatched eggs "
+							+ "you must be very silent and carefull not to wake the buggers up.");
 					System.out.println("One of the eggs is starting to hatch right next to you!");
 					System.out.println("Do you keep walking(1) or do you look at the egg(2)");
 					String choice4322=input.nextLine();
