@@ -12,20 +12,22 @@ public class LevelUNWE {
 		int choosenNumber = Integer.parseInt(input.nextLine());
 		switch (choosenNumber) {
 			case 1: { //Old hull
-				slowPrint(String.format("%s enter in the library and find old rare book.", hero.getName()), 60);
+				slowPrint(String.format("%s enters in the library and finds old rare book.", hero.getName()), 60);
 				slowPrint(String.format("%s starts reading the book.", hero.getName()), 60);
 				//sleep with dots (loading)
-				slowPrint(String.format("That book gives %s wisdom and +10 ability power.", hero.getName()), 60);
+				int bonusAbilityPower = randInt(10, 20);
+				slowPrint(String.format("That book gives %s wisdom and +%d ability power.", hero.getName(),
+						                bonusAbilityPower), 60);
 				System.out.printf("%s now has %d ability power.%n", hero.getName(), 
-						          hero.getAbilityPower() + 10);				
-				hero.setAbilityPower(hero.getAbilityPower() + 10);
+						          hero.getAbilityPower() + bonusAbilityPower);				
+				hero.setAbilityPower(hero.getAbilityPower() + bonusAbilityPower);
 				CommonEnemy enemy = new CommonEnemy("Mad Reader", randInt(200, 400), randInt(40, 80));
 				// sleep (little)
 				slowPrint(String.format("Unfortunatelly %s is attacked by %s (%d basic attack and %d HP).",
 						  hero.getName(), enemy.getName(), enemy.getBasicAttack(),  enemy.getHP()), 60);
-				slowPrint(String.format("That %s is furios because %s make too much noise in the library.", 
+				slowPrint(String.format("That %s is furios because %s makes too much noise in the library.", 
 						enemy.getName(), hero.getName()), 60);						
-				slowPrint("The battle begin. Prepare yourself!", 60);
+				slowPrint("The battle begins. Prepare yourself!", 60);
 				//sleep
 				battle (input, enemy, hero);
 				if (hero.isDead()) {
@@ -46,7 +48,7 @@ public class LevelUNWE {
 				case 1: {
 					slowPrint(String.format("Here is too crowdy. All that noise and people makes %s feel nervous.", 
 							  hero.getName()), 60);
-					slowPrint(String.format("%s loose 50 HP.", hero.getName()), 60);
+					slowPrint(String.format("Because of that %s loose 50 HP.", hero.getName()), 60);
 					hero.removeHP(50);
 					slowPrint(String.format("%s now has %d HP.", hero.getName(), hero.getHP()), 60);
 					slowPrint(String.format("Suddenly %1$s is attacked by zombie student who obviously "
@@ -61,18 +63,76 @@ public class LevelUNWE {
 					slowPrint(String.format("%s found some food on one of the desks.", hero.getName()), 60);
 					slowPrint(String.format("When %s try to get and eat it the hero is attacked again.", 
 							                hero.getName()), 60);
-					slowPrint("This time your attacker is Lelia Vanche the Crazy Cleaner.", 60);
+					slowPrint("This time the attacker is Lelia Vanche the Crazy Cleaner.", 60);
 					enemy = new CommonEnemy("Lelia Vanche", randInt(200, 400), randInt(40, 80));
+					slowPrint("The battle begins. Prepare yourself!", 60);
 					battle(input, enemy, hero);
 					if (hero.isDead()) {
 						return;
 					}	
 					//sleep
-					slowPrint(String.format("Finally you can sit and rest in the hall because everyone "
+					slowPrint(String.format("Finally %s can sit and rest in the hall because everyone "
 							              + "are gone.", hero.getName()), 60);
 					slowPrint("Resting..........", 60);
-					slowPrint(String.format("%s gain 100 bonus health after the rest", hero.getName()), 60);
-					slowPrint(String.format("%s has now %d HP.", hero.getName()), 60);
+					slowPrint(String.format("%s gains 100 bonus health after the rest.", hero.getName()), 60);
+					slowPrint(String.format("%s has now %d HP.", hero.getName(), hero.getHP()), 60);
+					slowPrint(String.format("%s decides to go to the toilet to do some stuff :D", hero.getName()), 60);
+					slowPrint(String.format("Unfortunatelly %s slips on the wet floor and falls down.", hero.getName()), 60);
+					slowPrint(String.format("%s looses 50 HP.", hero.getName()), 60);
+					slowPrint(String.format("%1$s meets an old “friend” who is not the same as %1$s remembers "
+							              + "him.", hero.getName()), 60);
+					slowPrint("He is now bigger because he has been drinking “Nacepin” recently.", 60);
+					slowPrint(String.format("He bullied %1$s in the past and now %1$s has he chance to revenge "
+							              + "for all that injustice.", hero.getName()), 60);
+					slowPrint(String.format("What do you want %s to do?", hero.getName()), 60);
+					System.out.println("1 – Attack him;  2 – Don't attack him and run like a chichken.");
+					enemy = new CommonEnemy ("Nacepeno Zombi", randInt(200, 400), randInt(40, 80));
+					choosenNumber = Integer.parseInt(input.nextLine());
+					if (choosenNumber == 1) {
+						slowPrint("The battle begins. Prepare yourself!", 60);
+						battle(input, enemy, hero);
+						if (hero.isDead()) {
+							return;
+						}	
+						//sleep
+					}
+					else {
+						slowPrint(String.format("Two students saw %1$s's chicken wings and realized that %1$s "
+								              + "is a coward.", hero.getName()), 60);
+						slowPrint(String.format("They kicked %1$s's ass. %1$s looses 100 HP.", 
+								                hero.getName()), 60);
+						hero.removeHP(100);
+						slowPrint(String.format("%s now has %d HP.", hero.getName(), hero.getHP()), 60);
+					}
+					slowPrint(String.format("%s finds finance calculator on the stairs. Hmmm it can help in that cursed "
+							              + "university.", hero.getName()), 60);
+					slowPrint(String.format("%s gains 30 ability power.", hero.getName()), 60);
+					hero.setAbilityPower(hero.getAbilityPower() + 30);
+					slowPrint(String.format("%s now has %d ability power.", hero.getName(), hero.getAbilityPower()), 60);
+					slowPrint(String.format("%s asks an administration worker simple question but the worker "
+							              + "goes crazy.", hero.getName()), 60);
+					slowPrint(String.format("How can %s be so stupid to ask such lame questions?", hero.getName()), 60);
+					slowPrint(String.format("%s is attacked by the worker because of the asked question.", hero.getName()), 60);
+					enemy = new CommonEnemy ("Crazy administration worker", randInt(200, 400), randInt(40, 80));
+					slowPrint("The battle begins. Prepare yourself!", 60);
+					battle(input, enemy, hero);
+					if (hero.isDead()) {
+						return;
+					}	
+					//sleep
+					slowPrint(String.format("After that fight %s decides to go to ask the rector why all people "
+							              + "in the university are crazy zombies.", hero.getName()), 60);
+					slowPrint(String.format("On the way to the rectorate %s finds big book (only 5000 pages) for the economic history, "
+							              + "which can be nice weapon indeed. ", hero.getName()), 60);
+					slowPrint(String.format("%s recieves 20 bonus basic attack", hero.getName()), 60);
+					hero.addBasicAttack(20);
+					slowPrint(String.format("%s now has %d basic attack.", hero.getName()), 60);
+					slowPrint(String.format("Finally %s meets the rector.", hero.getName()), 60);
+					slowPrint(String.format("%s realizes that the rector is zombied too and he is managing all "
+							+ "the crazy stuff in the university.", hero.getName()), 60);
+					slowPrint(String.format("A great battle is coming. The zombie rector attacks %s.", 
+							                hero.getName()), 60);
+					//BOSS FIGHT			
 				}
 				break;
 				
