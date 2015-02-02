@@ -77,7 +77,15 @@ public class LevelSoftUni {
 					hero.getHP());
 		}
 	}
-
+	
+	private static void goldStatus() {
+		System.out.printf("You have %d gold!\n", hero.getGold());
+	}
+	
+	private static void basicAttackStatus() {
+		System.out.printf("%s now has %d basic attack.\n", hero.getName(), hero.getBasicAttack());
+	}
+	
 	private static int rng() {
 		Random rngJesus = new Random();
 		int randomNum = rngJesus.nextInt(3);
@@ -103,6 +111,7 @@ public class LevelSoftUni {
 	private static void battleInfo(Hero hero, Boss enemy) {
 		if(hero.isDead()){
 			System.out.printf("%s gave you a few reasons to die and you accepted!\n", enemy.getName());
+			lineSeperator();
 			gameOver = true;
 		}
 		else if (enemy.isDead()) {
@@ -110,7 +119,8 @@ public class LevelSoftUni {
 					hero.getName(), enemy.getName());
 			hero.setName(hero.getName() + " The Slayer");
 			lineSeperator();
-			System.out.printf("You are now known as %s\n", hero.getName());
+			System.out.printf("You are now known as %s!\n", hero.getName());
+			lineSeperator();
 			gameOver = true;
 		}
 		else {
@@ -193,7 +203,9 @@ public class LevelSoftUni {
 				break;
 			}
 		}
-		System.out.printf("%s is no more!\n", enemy.getName());
+		int gold = 50 * rng();
+		System.out.printf("%s is no more! You loot %d gold.\n", enemy.getName(), gold);
+		hero.addGold(gold);
 		hpStatus(hero);
 	}
 	
@@ -384,12 +396,9 @@ public class LevelSoftUni {
 		case "1":
 			// Event;
 			lineSeperator();
-			hero.removeHP(100);
-			System.out.println("You tip over a cable, you loose 100 hp.");
+			hero.addHP(100);
+			System.out.println("You tip over a cable, but find magic potion for extra 100 hp.");
 			hpStatus(hero);
-			if (hero.isDead()) {
-				return;
-			}
 			break;
 		case "2":
 			// Event;
@@ -417,47 +426,48 @@ public class LevelSoftUni {
 		System.out.println("You rolled the dice!");
 		if (dice == 0) {
 			hero.setHP(500);
-			System.out.printf("The magic of the dice made you weak or perhaps stronger. Now you have %d hp", hero.getHP());
+			System.out.printf("The magic of the dice made you weaker or perhaps stronger. Now you have %d hp.\n", hero.getHP());
 		}
 		else if (dice == 1) {
 			int bonusAttack = rng() * rng();
 			hero.addBasicAttack(bonusAttack);
-			System.out.printf("You found a magic java code, as a result your basic attack now is %d", hero.getBasicAttack());
+			System.out.printf("You found a magic java code, as a result your basic attack now is %d.\n", hero.getBasicAttack());
 		}
 		else {
 			System.out.println("You are out of luck, nothing happend!");
 		}
 	}
 	
-	private static void shopEvent() { //add the coins and validation for them;
+	private static void shopEvent() { 
 		System.out.println("Trifon the ShopKeep is knowns all over the world for his good Java code. What would you like to buy?");
 		lineSeperator();
-		System.out.println("You have % gold");
+		System.out.printf("You have %d gold\n", hero.getGold());
 		lineSeperator();
 		System.out.println("\"Used Java code\"(1) for 100 gold/adds 100 basic attack/, \"New Java code\"(2) for 200 gold /adds 100 basic attack/ or Exit(3).");
 		choice = input.next();
 		choice = isValid(choice);
 		switch (choice) {
 		case "1":
-			payGold(100);
-			hero.addBasicAttack(100);
-			System.out.printf("%s now has %d basic attack\n", hero.getName(), hero.getBasicAttack());
-			break;
+			payGold(100, 100);
+			return;
 		case "2":
-			payGold(200);
-			hero.addBasicAttack(200);	
-			System.out.printf("%s now has %d basic attack\n", hero.getName(), hero.getBasicAttack());
-			break;
+			payGold(200, 200);
+			return;
 		}
 	}
 	
-	private static void payGold(int amount) { //implementation;
-		/*if (amount > hero.getGold()) {
-			
+	private static void payGold(int amount, int basicAttack) {
+		if (amount > hero.getGold()) {
+			int diff = amount - hero.getGold();
+			System.out.printf("You don't have enough gold! You need %d more!.\n", diff);
+			shopEvent();
 		}
 		else {
+			hero.addBasicAttack(100);
+			basicAttackStatus();
 			hero.removeGold(amount);
-		}*/
+			goldStatus();
+		}
 	}
 	
 	private static void chooseEvent() {

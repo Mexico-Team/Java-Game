@@ -6,6 +6,7 @@ public class Hero {
 	private int healthPoints;
 	private int basicAttack;
 	private int abilityPower;
+	private int gold;
 	private int mazeX;
 	private int mazeY;
 
@@ -17,6 +18,7 @@ public class Hero {
 		this.basicAttack = basicAttack;
 		this.abilityPower = abilityPower;
 		this.maximumAbilityPower = abilityPower;
+		this.gold = 0;
 		this.mazeX = 1;
 		this.mazeY = 1;
 	}
@@ -60,6 +62,14 @@ public class Hero {
 	
 	public int getMaximumAbilityPower() {
 		return maximumAbilityPower;
+	}
+	
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
 	}
 	
 	public int getMazeX() {
@@ -110,6 +120,14 @@ public class Hero {
 			return true;
 		}
 		return false;
+	}
+	
+	public void addGold(int value) {
+		this.gold += value;
+	}
+	
+	public void removeGold(int value) {
+		this.gold -= value;
 	}
 	
 }
