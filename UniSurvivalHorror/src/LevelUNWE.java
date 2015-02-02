@@ -2,6 +2,17 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class LevelUNWE {
+	
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
+	
 	public static void Execute(Hero player) {
 		Scanner input = new Scanner(System.in);
 		Hero hero = player;
@@ -121,12 +132,12 @@ public class LevelUNWE {
 					}	
 					//sleep
 					slowPrint(String.format("After that fight %s decides to go to ask the rector why all people "
-							              + "in the university are crazy zombies.", hero.getName()), 60);
+							              + "in the university have becomed crazy zombies.", hero.getName()), 60);
 					slowPrint(String.format("On the way to the rectorate %s finds big book (only 5000 pages) for the economic history, "
 							              + "which can be nice weapon indeed. ", hero.getName()), 60);
 					slowPrint(String.format("%s recieves 20 bonus basic attack", hero.getName()), 60);
 					hero.addBasicAttack(20);
-					slowPrint(String.format("%s now has %d basic attack.", hero.getName()), 60);
+					slowPrint(String.format("%s now has %d basic attack.", hero.getName(), hero.getBasicAttack()), 60);
 					slowPrint(String.format("Finally %s meets the rector.", hero.getName()), 60);
 					slowPrint(String.format("%s realizes that the rector is zombied too and he is managing all "
 							+ "the crazy stuff in the university.", hero.getName()), 60);
@@ -184,7 +195,8 @@ public class LevelUNWE {
 		boolean heroIsAlive = true;
 		while (true) {
 			System.out.println("Current round. How will you atack?");
-			System.out.println("1 - Use basic attack, 2 - Use ability power.");
+			System.out.println(ANSI_GREEN + "1 - Use basic attack" + ANSI_CYAN + " 2 - Use ability power."
+			                 + ANSI_WHITE);
 			
 			choosenNumber = Integer.parseInt(input.nextLine());
 			
@@ -197,22 +209,24 @@ public class LevelUNWE {
 				if (enemy.getHP() < 0) {
 					enemy.setHP(0);
 				}
-				System.out.printf("%1$s hitted the %2$s for %3$d damage. %2$s has %4$d hp left.%n", 
+				System.out.printf(ANSI_GREEN +"%1$s " + ANSI_WHITE + "hitted the " + ANSI_RED + "%2$s" 
+				+ ANSI_WHITE + " for " + ANSI_GREEN + "%3$d damage." + ANSI_WHITE + ANSI_RED + " %2$s" 
+				+ ANSI_WHITE + " has" + ANSI_RED + " %4$d hp" +ANSI_WHITE + " left.%n", 
 								 hero.getName(), enemy.getName(), currentHeroRandomBasicAttack, 
 						         enemy.getHP());
 			}
 			break;
 			case 2: { //Our hero uses ability power
 				if (currentHeroAbilityPower <= 0) {
-					System.out.println("You don't have ability power left.");
+					System.out.printf(ANSI_YELLOW + "%s doesn't have ability power left." + ANSI_WHITE, hero.getName());
 					continue;
 				}
 				else {
 					System.out.println("What ability do you want to use ?");
-					System.out.println("1 - Explain the economic history to the enemy (uses 25 ability power "
-							         + "and makes 100 damage).");
-					System.out.println("2 - Summon finance monster (uses 40 ability power and makes "
-							         + "160 damage).");
+					System.out.println("1 - Explain the economic history (uses"+ ANSI_CYAN + 
+					" 25 ability power " + ANSI_WHITE + "and makes " + ANSI_CYAN + "100 damage"+ ANSI_WHITE +").");
+					System.out.println("2 - Summon finance monster (uses" + ANSI_CYAN + " 40 ability power " 
+					+ ANSI_WHITE + "and makes "+ ANSI_CYAN +"160 damage"+ ANSI_WHITE + ").");
 					choosenNumber = Integer.parseInt(input.nextLine());
 					switch (choosenNumber) {
 					case 1: {
@@ -222,14 +236,18 @@ public class LevelUNWE {
 								enemy.setHP(0);
 							}
 							currentHeroAbilityPower -= 25;
-							System.out.printf("You explained everything to the %s.%n", enemy.getName());
-							System.out.printf("That ruined mentally the %s and his hp dropped with 100.%n", 
+							System.out.printf("You explained everything to the " + ANSI_RED +
+								              "%s" + ANSI_WHITE + ".%n", enemy.getName());
+							System.out.printf("That ruined mentally the" + ANSI_RED + " %s" + ANSI_WHITE 
+									        + " and his HP dropped with" + ANSI_RED + "100" + ANSI_WHITE + ".%n", 
 									          enemy.getName());
-							System.out.printf("The %s now has %d hp left.%n", enemy.getName(),
-									           enemy.getHP());
+							System.out.printf("The " + ANSI_RED + "%s" + ANSI_WHITE + 
+									          "now has " + ANSI_RED + "%d HP" + ANSI_WHITE + " left.%n", 
+									          enemy.getName(), enemy.getHP());
 						}
 						else {
-							System.out.println("You don't have enough ability power to use this ability.");
+							System.out.printf(ANSI_YELLOW + "%s doesn't have enough ability power "
+					                 + "to use this ability.%n" + ANSI_WHITE, hero.getName());
 							continue;
 						}		
 					}
@@ -249,7 +267,8 @@ public class LevelUNWE {
 									           enemy.getHP());
 						}
 						else {
-							System.out.println("You don't have enough ability power to use this ability.");
+							System.out.printf(ANSI_YELLOW + "%s doesn't have enough ability power "
+									                 + "to use this ability.%n" + ANSI_WHITE, hero.getName());
 							continue;
 						}	
 					}
@@ -283,9 +302,10 @@ public class LevelUNWE {
 			if (hero.getHP() < 0) {
 				hero.setHP(0);
 			}
-			System.out.printf("The %s hitted %s for %d damage.%n", enemy.getName(), 
+			System.out.printf("The " + ANSI_RED + "%s" + ANSI_WHITE + " hitted " + ANSI_GREEN + 
+					"%s" + ANSI_WHITE + " for " + ANSI_RED + "%d" + ANSI_WHITE + " damage.%n", enemy.getName(), 
 					          hero.getName(), currentEnemyRandomBasicAttack);
-			System.out.printf("%s has %d hp and %d ability power left.%n", hero.getName(), 
+			System.out.printf(ANSI_GREEN + "%s" + ANSI_WHITE + " has %d HP and %d ability power left.%n", hero.getName(), 
 					          hero.getHP(), currentHeroAbilityPower);
 			if (hero.getHP() == 0) { //Hero is dead
 				System.out.printf("%s is killed by the %s. Game over.%n", hero.getName(), 
@@ -300,7 +320,7 @@ public class LevelUNWE {
 			System.out.printf("Warning! HP low! %s has only %d HP left.%n", hero.getName(),
 							  hero.getHP());
 			System.out.printf("Do you want to get %s's hp recharched?%n", hero.getName());
-			System.out.printf("1 - Yes, 2 - No, %s is brave enough to fight without recharging%n", 
+			System.out.printf("1 - Yes; 2 - No, %s is brave enough to fight without recharging.%n", 
 							  hero.getName());
 			choosenNumber = Integer.parseInt(input.nextLine());
 			if (choosenNumber == 1) {
@@ -314,7 +334,7 @@ public class LevelUNWE {
 			System.out.printf("Warning! Ability power low! %s has only %d ability power left.%n", 
 					          hero.getName(), hero.getAbilityPower());
 			System.out.printf("Do you want to get %s's ability power recharched?%n", hero.getName());
-			System.out.printf("1 - Yes, 2 - No, %s is brave enough to fight without recharging", 
+			System.out.printf("1 - Yes; 2 - No, %s is brave enough to fight without recharging.%n", 
 					          hero.getName());
 	
 			choosenNumber = Integer.parseInt(input.nextLine());
