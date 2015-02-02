@@ -6,6 +6,7 @@ public class LevelSoftUni {
 	private static Scanner input = new Scanner(System.in);
 	private static Hero hero;
 	private static String choice;
+	private static boolean gameOver = false;
 	
 	public static void Execute(Hero player) {
 		hero = player;
@@ -29,17 +30,14 @@ public class LevelSoftUni {
 			return;
 		}
 
-		// Fourth Interaction - need death fix;
+		// Fourth Interaction - done;
 		char[][] maze = getMaze();
 		printMaze(maze);
-		//Start index of hero in maze is 1,1
-/*		directions[0] = 1; //dupricated
-		directions[1] = 1; //dupricated
 		
-*/		while (true) { //get detections for boss fight;
+		while (!gameOver) {
 			choice = input.nextLine();
-			//input validation
-			move(choice, maze); //need fixing
+			choice = isValidMove(choice);
+			move(choice, maze);
 			if (hero.isDead()) {
 				return;
 			}
@@ -53,6 +51,16 @@ public class LevelSoftUni {
 
 	private static String isValid(String choice) {
 		if (choice.equals("1") || choice.equals("2") || choice.equals("3")) {
+			return choice;
+		} else {
+			System.out.printf("%s is not valid choice, try again!", choice);
+			choice = input.nextLine();
+			return isValid(choice);
+		}
+	}
+	
+	private static String isValidMove(String choice) {
+		if (choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4")) {
 			return choice;
 		} else {
 			System.out.printf("%s is not valid choice, try again!", choice);
@@ -78,6 +86,7 @@ public class LevelSoftUni {
 
 	private static void battleInfo(Hero hero, CommonEnemy enemy) {
 		if(hero.isDead()){
+			lineSeperator();
 			System.out.println("You are no more, songs will be written in your honor!");
 		}
 		else if (enemy.isDead()) {
@@ -94,10 +103,15 @@ public class LevelSoftUni {
 	private static void battleInfo(Hero hero, Boss enemy) {
 		if(hero.isDead()){
 			System.out.printf("%s gave you a few reasons to die and you accepted!\n", enemy.getName());
+			gameOver = true;
 		}
 		else if (enemy.isDead()) {
 			System.out.printf("%s you did the unthinkable...%s is dead.\n",
 					hero.getName(), enemy.getName());
+			hero.setName(hero.getName() + " The Slayer");
+			lineSeperator();
+			System.out.printf("You are now known as %s\n", hero.getName());
+			gameOver = true;
 		}
 		else {
 			System.out.printf("%s has %d hp left, %s has %d hp left.\n",
@@ -396,7 +410,74 @@ public class LevelSoftUni {
 			break;
 		}
 	}
-
+	
+	private static void rollTheDice() {
+		int dice = rng();
+		lineSeperator();
+		System.out.println("You rolled the dice!");
+		if (dice == 0) {
+			hero.setHP(500);
+			System.out.printf("The magic of the dice made you weak or perhaps stronger. Now you have %d hp", hero.getHP());
+		}
+		else if (dice == 1) {
+			int bonusAttack = rng() * rng();
+			hero.addBasicAttack(bonusAttack);
+			System.out.printf("You found a magic java code, as a result your basic attack now is %d", hero.getBasicAttack());
+		}
+		else {
+			System.out.println("You are out of luck, nothing happend!");
+		}
+	}
+	
+	private static void shopEvent() { //add the coins and validation for them;
+		System.out.println("Trifon the ShopKeep is knowns all over the world for his good Java code. What would you like to buy?");
+		lineSeperator();
+		System.out.println("You have % gold");
+		lineSeperator();
+		System.out.println("\"Used Java code\"(1) for 100 gold/adds 100 basic attack/, \"New Java code\"(2) for 200 gold /adds 100 basic attack/ or Exit(3).");
+		choice = input.next();
+		choice = isValid(choice);
+		switch (choice) {
+		case "1":
+			payGold(100);
+			hero.addBasicAttack(100);
+			System.out.printf("%s now has %d basic attack\n", hero.getName(), hero.getBasicAttack());
+			break;
+		case "2":
+			payGold(200);
+			hero.addBasicAttack(200);	
+			System.out.printf("%s now has %d basic attack\n", hero.getName(), hero.getBasicAttack());
+			break;
+		}
+	}
+	
+	private static void payGold(int amount) { //implementation;
+		/*if (amount > hero.getGold()) {
+			
+		}
+		else {
+			hero.removeGold(amount);
+		}*/
+	}
+	
+	private static void chooseEvent() {
+		System.out.println("You can choose what to do. Go for a Special Event(1), Visit Trifon the ShopKeep(2), or Roll the Dice(3). What do you do?");
+		choice = input.nextLine();
+		choice = isValid(choice);
+		switch (choice) {
+		case "1":
+			specialEvent();
+			break;
+		case "2":
+			shopEvent();		
+			break;
+		case "3":
+			rollTheDice();
+			break;
+		}
+		
+	}
+	
 	private static char[][] getMaze() {
 		//Can be added more mazes;
 		lineSeperator();
@@ -432,6 +513,9 @@ public class LevelSoftUni {
 			if (isClear(nextPosition)) {
 				if (isEvent(nextPosition)) {
 					doEvent(nextPosition);
+					if (hero.isDead()) {
+						return;
+					}
 				}
 				maze[posRow][posCol] = '.';
 				maze[posRow][posCol + 1] = 'h';
@@ -448,6 +532,9 @@ public class LevelSoftUni {
 			if (isClear(nextPosition)) {
 				if (isEvent(nextPosition)) {
 					doEvent(nextPosition);
+					if (hero.isDead()) {
+						return;
+					}
 				}
 				maze[posRow][posCol] = '.';
 				maze[posRow][posCol - 1] = 'h';
@@ -464,6 +551,9 @@ public class LevelSoftUni {
 			if (isClear(nextPosition)) {
 				if (isEvent(nextPosition)) {
 					doEvent(nextPosition);
+					if (hero.isDead()) {
+						return;
+					}
 				}
 				maze[posRow][posCol] = '.';
 				maze[posRow - 1][posCol] = 'h';
@@ -480,6 +570,9 @@ public class LevelSoftUni {
 			if (isClear(nextPosition)) {
 				if (isEvent(nextPosition)) {
 					doEvent(nextPosition);
+					if (hero.isDead()) {
+						return;
+					}
 				}
 				maze[posRow][posCol] = '.';
 				maze[posRow + 1][posCol]= 'h';
@@ -508,7 +601,6 @@ public class LevelSoftUni {
 	private static void doEvent(char nextPosition) {
 		switch (nextPosition) {
 		case 'b':
-			//hero.setHP(20); //fix death!
 			int hp = 300 * (rng() + 1);
 			int basicAttack = 80 * (rng() + 1);
 			CommonEnemy enemy = new CommonEnemy("Maze Guard", hp, basicAttack);
@@ -524,7 +616,7 @@ public class LevelSoftUni {
 			break;
 		case 'x':
 			// Event;
-			specialEvent();
+			chooseEvent();
 			if (hero.isDead()) {
 				return;
 			}
