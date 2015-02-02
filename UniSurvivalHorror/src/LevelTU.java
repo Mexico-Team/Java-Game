@@ -200,15 +200,15 @@ public class LevelTU {
 				}
 				break;
 			case "2":
-				System.out.println("You head towards the toilets and open the toilets door");
-				System.out.println("A dense green mist quickly surround you!");
-				System.out.println("You start gasping for air butt the smell is just too strong");
+				System.out.println("You head towards the toilets and open the toilet's door.");
+				System.out.println("A dense green mist quickly surrounds you!");
+				System.out.println("You start gasping for air,but the smell is just too strong!");
 				System.out.println("You die a slow agonizing death "+hero.getName());
 				break;
 			case "3":
-				System.out.println("You safely reached the computer room");
+				System.out.println("You safely reached the computer room.");
 				System.out.println("As you open the door,Oleg the zombified 90y old coder charges at you"
-						+ " ,grabs you,and pushes you against the wall ");
+						+ " ,grabs you,and pushes you against the wall! ");
 				System.out.println("He starts to speak in your face and in the proccess wets your face with "
 						+ "his disgusting juices:");
 				System.out.println("Riddle me this "+hero.getName()+" how does a true coder code?");
@@ -219,7 +219,7 @@ public class LevelTU {
 					System.out.println("You write code on paper,very well,you are a true coder "
 							+ "of the TU clan");
 					System.out.println("I shall ask one more question of you and if you answer "
-							+ "corrently I will let you go");
+							+ "correctly I will let you go.");
 					System.out.println("How much is 1+1?");
 					String choice4323=input.nextLine();
 					switch(choice4323){
@@ -227,14 +227,14 @@ public class LevelTU {
 						System.out.println("You cheated "+hero.getName()+"! You really are a student of TU!");
 						System.out.println("Remember when I told you I was going to let you go?");
 						System.out.println("You look at the old zombie coder and say yes with a "
-								+ " trembling voice");
+								+ " trembling voice.");
 						System.out.println("Oleg stares at you and says:I LIED!!!");
 						System.out.println("He than drags you to his lair where he tortures "
 								+ " you for days before you die.");
 						break;
 					default:
 						System.out.println("WRONG!");
-						System.out.println("Oleg rips out your heart and you die");
+						System.out.println("Oleg rips out your heart and you die!");
 						break;
 					}
 					break;
