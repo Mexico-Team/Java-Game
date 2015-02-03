@@ -23,7 +23,7 @@ public class LevelUNWE {
 	public static void Execute(Hero player) {
 		Scanner input = new Scanner(System.in);
 		Hero hero = player;
-		int heroInitialAttack = hero.getBasicAttack();
+		hero.heroReseter();
 		slowPrint ("Very bad choice.", 60);
 		slowPrint ("You have deared to enter the economists realm. Prepare yourself!", 60);
 		slowPrint ("In which part of the university do you want to go? Choose your destiny!", 60);
@@ -53,7 +53,7 @@ public class LevelUNWE {
 						enemy.getName(), hero.getName()), 60);						
 				slowPrint("The battle begins. Prepare yourself!", 60);
 				
-				battle (input, enemy, hero, heroInitialAttack);
+				battle (input, enemy, hero);
 				if (hero.isDead()) {
 					return;
 				}		
@@ -82,7 +82,7 @@ public class LevelUNWE {
 					int randomLostHP = randInt(20,50);
 					slowPrint(String.format("Because of that %s looses %d HP.", hero.getName(), randomLostHP), 60);
 					hero.removeHP(randomLostHP);
-					if (deathAfterEvent(hero, heroInitialAttack)) {
+					if (deathAfterEvent(hero)) {
 						return;
 					}
 					slowPrint(String.format("%s now has %d HP.", hero.getName(), hero.getHP()), 60);
@@ -90,7 +90,7 @@ public class LevelUNWE {
 					slowPrint(String.format("Suddenly %1$s is attacked by zombie student (%2$d basic attack and %3$d HP) who obviously "
 							              + "has no brain and wants to eat %1$s's. ", hero.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 					slowPrint("The battle begins. Prepare yourself!", 60);
-					battle(input, enemy, hero, heroInitialAttack);
+					battle(input, enemy, hero);
 					if (hero.isDead()) {
 						return;
 					}	
@@ -101,7 +101,7 @@ public class LevelUNWE {
 					enemy = new CommonEnemy("Lelia Vanche", randInt(200, 400), randInt(40, 80));
 					slowPrint(String.format("This time the attacker is Lelia Vanche the crazy cleaner (%d basic attack and %d HP).", enemy.getBasicAttack(), enemy.getHP()), 60);
 					slowPrint("The battle begins. Prepare yourself!", 60);
-					battle(input, enemy, hero, heroInitialAttack);
+					battle(input, enemy, hero);
 					if (hero.isDead()) {
 						return;
 					}	
@@ -119,7 +119,7 @@ public class LevelUNWE {
 					randomLostHP = randInt(30,60);
 					slowPrint(String.format("%s looses %d HP.", hero.getName(), randomLostHP), 60);
 					hero.removeHP(randomLostHP);
-					if (deathAfterEvent(hero, heroInitialAttack)) {
+					if (deathAfterEvent(hero)) {
 						return;
 					}
 					slowPrint(String.format("%s has now %d HP.", hero.getName(), hero.getHP()), 60);
@@ -140,7 +140,7 @@ public class LevelUNWE {
 					if (choosenNumber.equals("1")) {
 						slowPrint(String.format("%s attacks %s (%d basic attack and %d HP).", hero.getName(), enemy.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 						slowPrint("The battle begins. Prepare yourself!", 60);
-						battle(input, enemy, hero, heroInitialAttack);
+						battle(input, enemy, hero);
 						if (hero.isDead()) {
 							return;
 						}	
@@ -152,7 +152,7 @@ public class LevelUNWE {
 						slowPrint(String.format("They kicked %1$s's ass. %1$s looses %2$d HP.", 
 								                hero.getName(), randomLostHP), 60);
 						hero.removeHP(randomLostHP);
-						if (deathAfterEvent(hero, heroInitialAttack)) {
+						if (deathAfterEvent(hero)) {
 							return;
 						}
 						slowPrint(String.format("%s now has %d HP.", hero.getName(), hero.getHP()), 60);
@@ -169,7 +169,7 @@ public class LevelUNWE {
 					enemy = new CommonEnemy ("Crazy administration worker", randInt(200, 400), randInt(40, 80));
 					slowPrint(String.format("%s is attacked by the worker (%d basic attack and %d HP), because of the asked question.", hero.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 					slowPrint("The battle begins. Prepare yourself!", 60);
-					battle(input, enemy, hero, heroInitialAttack);
+					battle(input, enemy, hero);
 					if (hero.isDead()) {
 						return;
 					}	
@@ -188,7 +188,7 @@ public class LevelUNWE {
 					Boss rector = new Boss ("Zombie rector", randInt(500, 1000), randInt(80, 120), randInt(100,200));
 					slowPrint(String.format("A great battle is coming. The zombie rector (%d basic attack, %d special attack, %d HP) attacks %s.",rector.getBasicAttack(), rector.getSpecialAttack(), rector.getHealthPoints(), 
 							                hero.getName()), 60);
-					bossBattle(input, rector, hero, heroInitialAttack);
+					bossBattle(input, rector, hero);
 					if (hero.isDead()) {
 						return;
 					}			
@@ -203,21 +203,21 @@ public class LevelUNWE {
 					hero.addBasicAttack(randomBonusAttack);
 					slowPrint(String.format("%s now has %d basic attack.", hero.getName(), hero.getBasicAttack()), 60);
 					slowPrint(String.format("Suddenly the professor stars arguing with %s.", hero.getName()), 60);
-					slowPrint("That is what vodka do to some people.", 60);
+					slowPrint("This is what vodka do to some people.", 60);
 					enemy = new CommonEnemy ("Drunk professor", randInt(200, 400), randInt(40, 80));
 					slowPrint(String.format("%s is attacked by the drunk professor (%d basic attack and %d HP).", hero.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 					slowPrint("The battle begins. Prepare yourself!", 60);
-					battle(input, enemy, hero, heroInitialAttack);
+					battle(input, enemy, hero);
 					if (hero.isDead()) {
 						return;
 					}	
 					
-					slowPrint(String.format("After that crazy fight %s runs fast from professors room.", hero.getName()), 60);
+					slowPrint(String.format("After that crazy fight %s runs fast from the professors room.", hero.getName()), 60);
 					slowPrint(String.format("Acidently %s stumble over one dropped on the floor book called “Investments” (only 1000 pages and 3 kg. weight).", hero.getName()), 60);
 					int randomLostHP = randInt(25, 50);
 					hero.removeHP(randomLostHP);
 					slowPrint(String.format("%s looses %d HP.", hero.getName(), randomLostHP), 60);
-					if (deathAfterEvent(hero, heroInitialAttack)) {
+					if (deathAfterEvent(hero)) {
 						return;
 					}
 					slowPrint(String.format("%s now has %d HP.", hero.getName(), hero.getHP()), 60);
@@ -231,7 +231,7 @@ public class LevelUNWE {
 					slowPrint(String.format("The zombie rector sees %1$s and wants to eat %1$s's brain to make %1$s zombie too.", hero.getName()), 60);
 					slowPrint(String.format("A great battle is coming. The zombie rector (%d basic attack, %d special attack, %d HP) attacks %s.",rector.getBasicAttack(), rector.getSpecialAttack(), rector.getHealthPoints(), 
 			                hero.getName()), 60);
-					bossBattle(input, rector, hero, heroInitialAttack);
+					bossBattle(input, rector, hero);
 					if (hero.isDead()) {
 						return;
 					}
@@ -264,7 +264,7 @@ public class LevelUNWE {
 				CommonEnemy enemy = new CommonEnemy ("Zombie Guard", randInt(200,400), randInt(40,80));
 				slowPrint(String.format("For welcome %s is attacked by one crazy zombie guard (%d basic attack and %d HP) who doesn't like visitors.", hero.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 				slowPrint("The battle begins. Prepare yourself!", 60);
-				battle(input, enemy, hero, heroInitialAttack);
+				battle(input, enemy, hero);
 				if (hero.isDead()) {
 					return;
 				}
@@ -277,7 +277,7 @@ public class LevelUNWE {
 				enemy = new CommonEnemy ("Hungry zombie", randInt(200,400), randInt(40,80));
 				slowPrint(String.format("The hungry zombie (%d basic attack and %d HP) attacks %s.", enemy.getBasicAttack(), enemy.getHP(), hero.getName()), 60);
 				slowPrint("The battle begins. Prepare yourself!", 60);
-				battle(input, enemy, hero, heroInitialAttack);
+				battle(input, enemy, hero);
 				if (hero.isDead()) {
 					return;
 				}
@@ -285,18 +285,18 @@ public class LevelUNWE {
 				int randomLostHP = randInt(30,60);
 				hero.removeHP(randomLostHP);
 				slowPrint(String.format("%s looses %d HP.", hero.getName(), randomLostHP), 60);
-				if (deathAfterEvent(hero, heroInitialAttack)) {
+				if (deathAfterEvent(hero)) {
 					return;
 				}
 				slowPrint(String.format("%s now has %d HP.", hero.getName(), hero.getHP()), 60);
 				int randomBonusAbilityPower = randInt(20, 60);
-				slowPrint(String.format("%s finds very old and valuable book which gave him knowledge and %d ability power.", hero.getName(), randomBonusAbilityPower), 60);
+				slowPrint(String.format("%s finds very old and valuable book which gives knowledge and %d ability power.", hero.getName(), randomBonusAbilityPower), 60);
 				hero.setAbilityPower(hero.getAbilityPower() + randomBonusAbilityPower);
 				slowPrint(String.format("%s now has %d ability power.", hero.getName(), hero.getAbilityPower()), 60);
 				enemy = new CommonEnemy ("Crazy professor", randInt(200,400), randInt(40,80));
 				slowPrint(String.format("%s is attacked by old crazy professor (%d basic attack and %d HP) who likes to torture students.", hero.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 				slowPrint("The battle begins. Prepare yourself!", 60);
-				battle(input, enemy, hero, heroInitialAttack);
+				battle(input, enemy, hero);
 				if (hero.isDead()) {
 					return;
 				}
@@ -309,7 +309,7 @@ public class LevelUNWE {
 				slowPrint(String.format("The zombie rector sees %1$s and wants to eat %1$s's brain and make %1$s zombie too.", hero.getName()), 60);
 				slowPrint(String.format("A great battle is coming. The zombie rector (%d basic attack, %d special attack, %d HP) attacks %s.",rector.getBasicAttack(), rector.getSpecialAttack(), rector.getHealthPoints(), 
 		                hero.getName()), 60);
-				bossBattle(input, rector, hero, heroInitialAttack);
+				bossBattle(input, rector, hero);
 				if (hero.isDead()) {
 					return;
 				}
@@ -322,7 +322,7 @@ public class LevelUNWE {
 				int randomLostHP = randInt(30, 60);
 			    slowPrint(String.format("After 3 hours of waiting %s gets very tired and looses %d HP.", hero.getName(), randomLostHP), 60);
 			    hero.removeHP(randomLostHP);
-				if (deathAfterEvent(hero, heroInitialAttack)) {
+				if (deathAfterEvent(hero)) {
 					return;
 				}
 			    slowPrint(String.format("%s now has %d HP.", hero.getName(), hero.getHP()), 60);
@@ -330,7 +330,7 @@ public class LevelUNWE {
 				CommonEnemy enemy = new CommonEnemy ("Zombie bank guard", randInt(200,400), randInt(40,80));
 				slowPrint(String.format("%1$s is attacked by a zombie bank guard (%2$d basic attack and %3$d HP) who thinks that %1$s is suspicious.", hero.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 				slowPrint("The battle begins. Prepare yourself!", 60);
-				battle(input, enemy, hero, heroInitialAttack);
+				battle(input, enemy, hero);
 				if (hero.isDead()) {
 					return;
 				}
@@ -342,7 +342,7 @@ public class LevelUNWE {
 				enemy = new CommonEnemy ("Angry clerk", randInt(200,400), randInt(40,80));
 				slowPrint(String.format("One angry clerk (%2$d basic attack and %3$d HP) attacks %1$s because %1$s wants to withdraw money but doesn't have ID.", hero.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 				slowPrint("The battle begins. Prepare yourself!", 60);
-				battle(input, enemy, hero, heroInitialAttack);
+				battle(input, enemy, hero);
 				if (hero.isDead()) {
 					return;
 				}
@@ -353,7 +353,7 @@ public class LevelUNWE {
 				randomLostHP = randInt(30,60);
 				hero.removeHP(randomLostHP);
 				slowPrint(String.format("%s looses %d HP.", hero.getName(), randomLostHP), 60);
-				if (deathAfterEvent(hero, heroInitialAttack)) {
+				if (deathAfterEvent(hero)) {
 					return;
 				}
 				slowPrint(String.format("%s now has %d HP.", hero.getName(), hero.getHP()), 60);
@@ -364,7 +364,7 @@ public class LevelUNWE {
 				enemy = new CommonEnemy ("Zombie dog", randInt(200,400), randInt(40,80));
 				slowPrint(String.format("%s is attacked by a zombie dog (%d basic attack and %d HP). That dog for sure is hungry for flesh.", hero.getName(), enemy.getBasicAttack(), enemy.getHP()), 60);
 				slowPrint("The battle begins. Prepare yourself!", 60);
-				battle(input, enemy, hero, heroInitialAttack);
+				battle(input, enemy, hero);
 				if (hero.isDead()) {
 					return;
 				}
@@ -377,7 +377,7 @@ public class LevelUNWE {
 				Boss rector = new Boss ("Zombie rector", randInt(500, 1000), randInt(80, 120), randInt(100,200));
 				slowPrint(String.format("The zombie rector (%2$d basic attack, %3$d special attack, %4$d HP) sees %1$s and wants to eat %1$s's brain and make %1$s zombie too.", hero.getName(), rector.getBasicAttack(), rector.getSpecialAttack(), rector.getHealthPoints()), 60);
 				slowPrint(String.format("A great battle is coming. The zombie rector attacks %s.", hero.getName()), 60);
-				bossBattle(input, rector, hero, heroInitialAttack);
+				bossBattle(input, rector, hero);
 				if (hero.isDead()) {
 					return;
 				}
@@ -386,16 +386,12 @@ public class LevelUNWE {
 		}
 	}
 
-	private static boolean deathAfterEvent(Hero hero, int heroInitialAttack) {
+	private static boolean deathAfterEvent(Hero hero) {
 		if (hero.isDead()) {
 			hero.setHP(0);
 			slowPrint(String.format("%s has %d HP left.", hero.getName(), hero.getHP()), 60);
 			slowPrint(String.format("%s has DIED.", hero.getName()), 60);
 			slowPrint(ANSI_RED + "GAME OVER" + ANSI_RESET, 400);
-			hero.resetHP();
-			hero.resetAbilityPower();
-			hero.setBasicAttack(heroInitialAttack);
-			hero.setGold(0);
 			return true;
 		}
 		return false;
@@ -413,22 +409,27 @@ public class LevelUNWE {
 		System.out.println();
 	}
 	
-	public static void battle (Scanner input, CommonEnemy enemy, Hero hero, int heroInitialAttack) {
+	public static void battle (Scanner input, CommonEnemy enemy, Hero hero) {
 		int currentEnemyBasicAttack = enemy.getBasicAttack();
 		int currentHeroBasicAttack = hero.getBasicAttack();
-		int currentHeroAbilityPower = hero.getAbilityPower();
-		int choosenNumber = 0;
+		int currentHeroAbilityPower = hero.getAbilityPower();	
 		boolean heroIsAlive = true;
+		
 		while (true) {
 			System.out.println("Current round. How will you atack?");
 			System.out.println(ANSI_GREEN + "1 - Use basic attack" + ANSI_CYAN + " 2 - Use ability power"
 			                 + ANSI_RESET);
 			
-			choosenNumber = Integer.parseInt(input.nextLine());
-			
+			choosenNumber = input.nextLine();
+			while (!(choosenNumber.equals("1") || choosenNumber.equals("2"))) {
+				System.out.println("Invalid choice. Try again.");
+				System.out.println(ANSI_GREEN + "1 - Use basic attack" + ANSI_CYAN + " 2 - Use ability power"
+		                 + ANSI_RESET);
+				choosenNumber = input.nextLine();
+			}
 			//Our hero attacks
 			switch (choosenNumber) {
-			case 1: { //Our hero uses basic attack
+			case "1": { //Our hero uses basic attack
 				int currentHeroRandomBasicAttack = randInt(currentHeroBasicAttack - 20, currentHeroBasicAttack + 20);
 				enemy.removeHP(currentHeroRandomBasicAttack);
 				if (enemy.getHP() < 0) {
@@ -441,21 +442,31 @@ public class LevelUNWE {
 						         enemy.getHP());
 			}
 			break;
-			case 2: { //Our hero uses ability power
+			case "2": { //Our hero uses ability power
 				if (currentHeroAbilityPower <= 0) {
 					System.out.printf(ANSI_YELLOW + "%s doesn't have ability power left.%n" + ANSI_RESET, hero.getName());
 					continue;
 				}
 				else {
 					System.out.println("What ability do you want to use ?");
-					System.out.println("1 - " + ANSI_CYAN + "Explain the theory of the economic history" + ANSI_RESET + 
+					System.out.println(ANSI_CYAN + "1 - Explain the theory of the economic history" + ANSI_RESET + 
 							           " (uses"+ ANSI_CYAN + " 25 ability power " + ANSI_RESET + "and makes " 
 							           + ANSI_CYAN + "100 damage"+ ANSI_RESET +").");
-					System.out.println("2 - "+ ANSI_CYAN + "Summon finance monster" + ANSI_RESET + " (uses" + ANSI_CYAN + " 40 ability power " 
+					System.out.println(ANSI_CYAN + "2 - Summon finance monster" + ANSI_RESET + " (uses" + ANSI_CYAN + " 40 ability power " 
 					+ ANSI_RESET + "and makes "+ ANSI_CYAN +"160 damage"+ ANSI_RESET + ").");
-					choosenNumber = Integer.parseInt(input.nextLine());
+							
+					choosenNumber = input.nextLine();
+					while (!(choosenNumber.equals("1") || choosenNumber.equals("2"))) {
+						System.out.println("Invalid choice. Try again.");
+						System.out.println(ANSI_CYAN + "1 - Explain the theory of the economic history" + ANSI_RESET + 
+						           " (uses"+ ANSI_CYAN + " 25 ability power " + ANSI_RESET + "and makes " 
+						           + ANSI_CYAN + "100 damage"+ ANSI_RESET +").");
+						System.out.println(ANSI_CYAN + "2 - Summon finance monster" + ANSI_RESET + " (uses" + ANSI_CYAN + " 40 ability power " 
+				                   + ANSI_RESET + "and makes "+ ANSI_CYAN +"160 damage"+ ANSI_RESET + ").");
+						choosenNumber = input.nextLine();
+					}
 					switch (choosenNumber) {
-					case 1: {
+					case "1": {
 						if (currentHeroAbilityPower >= 25) {
 							enemy.removeHP(100);
 							if (enemy.getHP() < 0) {
@@ -479,7 +490,7 @@ public class LevelUNWE {
 					}
 					break;
 					
-					case 2: {
+					case "2": {
 						if (currentHeroAbilityPower >= 40) {
 							enemy.removeHP(160);
 							if (enemy.getHP() < 0) {
@@ -499,16 +510,10 @@ public class LevelUNWE {
 						}	
 					}
 					break;
-					default:
-						System.out.println("Invalid choice.");
-						continue;
 					}
 				}			
 			}
 			break;
-			default:
-				System.out.println("Invalid choice.");
-				continue;
 			}		
 			
 			if (enemy.getHP() == 0) { //The enemy is killed
@@ -538,10 +543,6 @@ public class LevelUNWE {
 			if (hero.getHP() == 0) { //Hero is dead
 				System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " is killed by the " + ANSI_RED + "%s" + ANSI_RESET + ".%n", hero.getName(), enemy.getName());
 				slowPrint(ANSI_RED + "GAME OVER" + ANSI_RESET, 400);
-				hero.resetHP();
-				hero.resetAbilityPower();
-				hero.setBasicAttack(heroInitialAttack);
-				hero.setGold(0);
 				heroIsAlive = false;
 				break;
 			}
@@ -552,16 +553,17 @@ public class LevelUNWE {
 			System.out.printf(ANSI_RED + "WARNING! HP LOW! " + ANSI_RESET + ANSI_GREEN + "%s" + ANSI_RESET + " has only " + ANSI_RED + "%d HP" + ANSI_RESET + " left.%n", hero.getName(),
 							  hero.getHP());
 			System.out.printf("Do you want to get " + ANSI_GREEN + "%1$s's HP" + ANSI_RESET + " recharched? It will cost " + ANSI_GREEN + "%1$s" + ANSI_RESET + ANSI_YELLOW +  " 150 gold" + ANSI_RESET + ".%n", hero.getName());
-			System.out.printf("1 - " + ANSI_GREEN + "Yes" + ANSI_RESET + "; 2 - " + ANSI_RED + "No" + ANSI_RESET + ", " +  ANSI_GREEN + "%s" + ANSI_RESET + " is brave enough to fight without recharging.%n", 
-							  hero.getName());
-			choosenNumber = Integer.parseInt(input.nextLine());
-			while (!(choosenNumber == 1 || choosenNumber == 2)) {
+			System.out.printf(ANSI_GREEN + "1 - Yes" + ANSI_RESET + ANSI_RED + " 2 - No" + ANSI_RESET + ", " +  ANSI_GREEN + "%s" + ANSI_RESET + " is brave enough to fight without recharging.%n", 
+					  hero.getName());
+			
+			choosenNumber = input.nextLine();
+			while (!(choosenNumber.equals("1") || choosenNumber.equals("2"))) {
 				System.out.println("Invalid choice. Try again.");
-				System.out.printf("1 - " + ANSI_GREEN + "Yes" + ANSI_RESET + " 2 - " + ANSI_RED + "No" + ANSI_RESET + ", " +  ANSI_GREEN + "%s" + ANSI_RESET + " is brave enough to fight without recharging.%n", 
-						  	      hero.getName());
-				choosenNumber = Integer.parseInt(input.nextLine());
+				System.out.printf(ANSI_GREEN + "1 - Yes" + ANSI_RESET + ANSI_RED + " 2 - No" + ANSI_RESET + ", " +  ANSI_GREEN + "%s" + ANSI_RESET + " is brave enough to fight without recharging.%n", 
+						  hero.getName());
+				choosenNumber = input.nextLine();
 			}
-			if (choosenNumber == 1) {
+			if (choosenNumber.equals("1")) {
 				if (hero.getGold() >= 150) {
 					hero.removeGold(150);
 					hero.resetHP();
@@ -580,47 +582,51 @@ public class LevelUNWE {
 			System.out.printf(ANSI_RED + "WARNING! Ability power LOW!" + ANSI_RESET + ANSI_GREEN + " %s" + ANSI_RESET + " has only " + ANSI_CYAN + "%d ability power" + ANSI_RESET + " left.%n", 
 					          hero.getName(), hero.getAbilityPower());
 			System.out.printf("Do you want to get " + ANSI_GREEN + "%1$s's" + ANSI_RESET + ANSI_CYAN + " ability power" + ANSI_RESET + " recharched? It will cost " + ANSI_GREEN + "%1$s" + ANSI_RESET + ANSI_YELLOW  + " 100 gold" + ANSI_RESET + ".%n", hero.getName());
-			System.out.printf("1 - " + ANSI_GREEN + "Yes" + ANSI_RESET + "; 2 - " + ANSI_RED + "No" + ANSI_RESET + ", " +  ANSI_GREEN + "%s" + ANSI_RESET + " is brave enough to fight without recharging.%n", 
+			System.out.printf(ANSI_GREEN + "1 - Yes" + ANSI_RESET + ANSI_RED + " 2 - No" + ANSI_RESET + ", " +  ANSI_GREEN + "%s" + ANSI_RESET + " is brave enough to fight without recharging.%n", 
 					  hero.getName());
 	
-			choosenNumber = Integer.parseInt(input.nextLine());
-			while (!(choosenNumber == 1 || choosenNumber == 2)) {
+			choosenNumber = input.nextLine();
+			while (!(choosenNumber.equals("1") || choosenNumber.equals("2"))) {
 				System.out.println("Invalid choice. Try again.");
-				System.out.printf("1 - " + ANSI_GREEN + "Yes" + ANSI_RESET + " 2 - " + ANSI_RED + "No" + ANSI_RESET + ", " +  ANSI_GREEN + "%s" + ANSI_RESET + " is brave enough to fight without recharging.%n", 
-						  	      hero.getName());
-				choosenNumber = Integer.parseInt(input.nextLine());
+				System.out.printf(ANSI_GREEN + "1 - Yes" + ANSI_RESET + ANSI_RED + " 2 - No" + ANSI_RESET + ", " +  ANSI_GREEN + "%s" + ANSI_RESET + " is brave enough to fight without recharging.%n", 
+						  hero.getName());
+				choosenNumber = input.nextLine();
 			}
-			if (choosenNumber == 1) {
+			if (choosenNumber.equals("1")) {
 				if (hero.getGold() >= 100) {
 				hero.removeGold(100);			
 				hero.resetAbilityPower();
 				System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " now has " + ANSI_CYAN + "%d ability power" + ANSI_RESET + ".%n", hero.getName(), hero.getAbilityPower());
 				System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " has " + ANSI_YELLOW + "%d gold" + ANSI_RESET + " remaining.%n", hero.getName(), hero.getGold());
 				}
-			}
-			else {
-				System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " doesn't have enough " + ANSI_YELLOW + "gold" + ANSI_RESET + "!%n", hero.getName());
-			}
+				else {
+					System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " doesn't have enough " + ANSI_YELLOW + "gold" + ANSI_RESET + "!%n", hero.getName());
+				}
+			}			
 		}
 	}
 	
-	public static void bossBattle (Scanner input, Boss rector, Hero hero, int heroInitialAttack) {
+	public static void bossBattle (Scanner input, Boss rector, Hero hero) {
 		int bossBasicAttack = rector.getBasicAttack();
 		int bossSpecialAttack = rector.getSpecialAttack();
 		int heroBasiAttack = hero.getBasicAttack();
 		int heroAbilityPower = hero.getAbilityPower();
-		int choosenNumber = 0;
 		
 		while (true) {
 			System.out.println("Current round. How will you atack?");
 			System.out.println(ANSI_GREEN + "1 - Use basic attack" + ANSI_CYAN + " 2 - Use ability power"
 			                 + ANSI_RESET);
 			
-			choosenNumber = Integer.parseInt(input.nextLine());
-			
+			choosenNumber = input.nextLine();
+			while (!(choosenNumber.equals("1") || choosenNumber.equals("2"))) {
+				System.out.println("Invalid choice. Try again.");
+				System.out.println(ANSI_GREEN + "1 - Use basic attack" + ANSI_CYAN + " 2 - Use ability power"
+		                 + ANSI_RESET);
+				choosenNumber = input.nextLine();
+			}
 			//Our hero attacks
 			switch (choosenNumber) {
-			case 1: { //Our hero uses basic attack
+			case "1": { //Our hero uses basic attack
 				int currentHeroRandomBasicAttack = randInt(heroBasiAttack - 20, heroBasiAttack + 20);
 				rector.removeHP(currentHeroRandomBasicAttack);
 				if (rector.getHealthPoints() < 0) {
@@ -633,21 +639,31 @@ public class LevelUNWE {
 								 rector.getHealthPoints());
 			}
 			break;
-			case 2: { //Our hero uses ability power
+			case "2": { //Our hero uses ability power
 				if (heroAbilityPower <= 0) {
 					System.out.printf(ANSI_YELLOW + "%s doesn't have ability power left.%n" + ANSI_RESET, hero.getName());
 					continue;
 				}
 				else {
 					System.out.println("What ability do you want to use ?");
-					System.out.println("1 - " + ANSI_CYAN + "Explain the theory of the economic history" + ANSI_RESET + 
+					System.out.println(ANSI_CYAN  + "1 - Explain the theory of the economic history" + ANSI_RESET + 
 							           " (uses"+ ANSI_CYAN + " 25 ability power " + ANSI_RESET + "and makes " 
 							           + ANSI_CYAN + "100 damage"+ ANSI_RESET +").");
-					System.out.println("2 - "+ ANSI_CYAN + "Summon finance monster" + ANSI_RESET + " (uses" + ANSI_CYAN + " 40 ability power " 
+					System.out.println(ANSI_CYAN  + "2 - Summon finance monster" + ANSI_RESET + " (uses" + ANSI_CYAN + " 40 ability power " 
 					+ ANSI_RESET + "and makes "+ ANSI_CYAN +"160 damage"+ ANSI_RESET + ").");
-					choosenNumber = Integer.parseInt(input.nextLine());
+					
+					choosenNumber = input.nextLine();
+					while (!(choosenNumber.equals("1") || choosenNumber.equals("2"))) {
+						System.out.println("Invalid choice. Try again.");
+						System.out.println(ANSI_CYAN  + "1 - Explain the theory of the economic history" + ANSI_RESET + 
+						           " (uses"+ ANSI_CYAN + " 25 ability power " + ANSI_RESET + "and makes " 
+						           + ANSI_CYAN + "100 damage"+ ANSI_RESET +").");
+						System.out.println(ANSI_CYAN  + "2 - Summon finance monster" + ANSI_RESET + " (uses" + ANSI_CYAN + " 40 ability power " 
+								  + ANSI_RESET + "and makes "+ ANSI_CYAN +"160 damage"+ ANSI_RESET + ").");
+						choosenNumber = input.nextLine();
+					}
 					switch (choosenNumber) {
-					case 1: {
+					case "1": {
 						if (heroAbilityPower >= 25) {
 							rector.removeHP(100);;
 							if (rector.getHealthPoints() < 0) {
@@ -671,7 +687,7 @@ public class LevelUNWE {
 					}
 					break;
 					
-					case 2: {
+					case "2": {
 						if (heroAbilityPower >= 40) {
 							rector.removeHP(160);
 							if (rector.getHealthPoints() < 0) {
@@ -691,16 +707,10 @@ public class LevelUNWE {
 						}	
 					}
 					break;
-					default:
-						System.out.println("Invalid choice.");
-						continue;
 					}
 				}			
 			}
 			break;
-			default:
-				System.out.println("Invalid choice.");
-				continue;
 			}		
 			
 			if (rector.getHealthPoints() == 0) { //The boss is killed
@@ -713,10 +723,6 @@ public class LevelUNWE {
 				System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " has " + ANSI_GREEN + "%d HP" + ANSI_RESET + ", " + ANSI_CYAN + "%d ability power" + ANSI_RESET + " and" + ANSI_YELLOW + " %d gold" + ANSI_RESET + ".%n", hero.getName(), 
 						          hero.getHP(), hero.getAbilityPower(), hero.getGold());
 				System.out.println(ANSI_YELLOW + "CONGRATUALTIONS. You have successfuly complete the level." + ANSI_RESET);
-				hero.resetHP();
-				hero.resetAbilityPower();
-				hero.setBasicAttack(heroInitialAttack);
-				hero.setGold(0);
 				break;
 			}
 			
@@ -725,26 +731,24 @@ public class LevelUNWE {
 			
 			int basicOrSpecialNumber = randInt(1, 100);
 			
-			if (basicOrSpecialNumber <= 50) {
-				//The enemy attacks with Basic Attack
+			if (basicOrSpecialNumber <= 50) { //The enemy attacks with Basic Attack
 				hero.removeHP(bossRandomBasicAttack);
 				if (hero.getHP() < 0) {
 					hero.setHP(0);
 				}
 				System.out.printf("The " + ANSI_RED + "%s" + ANSI_RESET + " hitted " + ANSI_GREEN + 
-						"%s" + ANSI_RESET + " with Basic Attack for " + ANSI_RED + "%d damage.%n" + ANSI_RESET, rector.getName(), 
+						"%s" + ANSI_RESET + " with " + ANSI_BLUE + "Basic Attack" + ANSI_RESET + " for " + ANSI_RED + "%d damage.%n" + ANSI_RESET, rector.getName(), 
 						          hero.getName(), bossRandomBasicAttack);
 				System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " has " + ANSI_GREEN + "%d HP" + ANSI_RESET + " and " + ANSI_CYAN + "%d ability power left" + ANSI_RESET + ".%n", hero.getName(), 
 				          hero.getHP(), heroAbilityPower);
 			}
-			else {
-				//The enemy attacks with Special Attack
+			else { //The enemy attacks with Special Attack
 				hero.removeHP(bossRandomSpecialAttack);
 				if (hero.getHP() < 0) {
 					hero.setHP(0);
 				}
 				System.out.printf("The " + ANSI_RED + "%s" + ANSI_RESET + " hitted " + ANSI_GREEN + 
-						"%s" + ANSI_RESET + " with Special Attack" + " for " + ANSI_RED + "%d damage.%n" + ANSI_RESET, rector.getName(), 
+						"%s" + ANSI_RESET + " with " + ANSI_BLUE + "Special Attack" + ANSI_RESET + " for " + ANSI_RED + "%d damage.%n" + ANSI_RESET, rector.getName(), 
 						          hero.getName(), bossRandomSpecialAttack);
 				System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " has " + ANSI_GREEN + "%d HP" + ANSI_RESET + " and " + ANSI_CYAN + "%d ability power left" + ANSI_RESET + ".%n", hero.getName(), 
 				          hero.getHP(), heroAbilityPower);
@@ -753,10 +757,6 @@ public class LevelUNWE {
 			if (hero.getHP() == 0) { //Hero is dead
 				System.out.printf(ANSI_GREEN + "%s" + ANSI_RESET + " is killed by the " + ANSI_RED + "%s" + ANSI_RESET + ".%n", hero.getName(), rector.getName());
 				slowPrint(ANSI_RED + "GAME OVER" + ANSI_RESET, 400);
-				hero.resetHP();
-				hero.resetAbilityPower();
-				hero.setBasicAttack(heroInitialAttack);
-				hero.setGold(0);
 				break;
 			}
 		}	
