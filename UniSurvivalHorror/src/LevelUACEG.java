@@ -382,15 +382,18 @@ public class LevelUACEG {
 				enemyHp -= basicAttack;
 				heroHp -= (enemyBasicAttack + randomNumAttack);
 				heroBasicAttack -= randomNumAttack;
+				if (heroBasicAttack <= 40) {
+					heroBasicAttack = 40;
+				} 
 
 				if (enemyHp <= 0) {
 					hero.setHP(heroHp);
 					System.out.printf("You killed %s!\n", enemy.getName());
-					break;
+					return;
 				}
 				if (heroHp <= 0) {
 					System.out.println("You are DEAD!!");
-					break;
+					return;
 				}
 				
 				System.out.printf(
@@ -412,12 +415,12 @@ public class LevelUACEG {
 				if (enemyHp <= 0) {
 					hero.setHP(heroHp);
 					System.out.printf("You killed %s!\n", enemy.getName());
-					break;
+					return;
 				}
 				
 				if (heroHp <= 0) {								// !!!!!!!!!!!!!! not working
 					System.out.println("You are DEAD!!");
-					break;
+					return;
 				}
 
 				System.out.printf(
